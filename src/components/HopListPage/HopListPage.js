@@ -7,9 +7,8 @@ import React from 'react';
 
 const InfoPage = () => (
   <div>
-    <p>
-      Info Page
-    </p>
+    <h2>Hop List Page</h2>
+    
   </div>
 );
 
