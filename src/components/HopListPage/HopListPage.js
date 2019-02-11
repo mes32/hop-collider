@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import './HopListPage.css';
 import HopListRow from './HopListRow/HopListRow';
 
 class HopListPage extends Component {
