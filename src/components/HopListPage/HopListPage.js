@@ -24,6 +24,7 @@ class HopListPage extends Component {
                             <th>Aromas</th>
                             <th>Brewing Role</th>
                             <th>Alpha Acid (%)</th>
+                            <th>About</th>
                         </tr>
                     </thead>
                     <tbody>

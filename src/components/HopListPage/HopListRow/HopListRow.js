@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class HopListRow extends Component {
 
@@ -15,6 +16,7 @@ class HopListRow extends Component {
     render() {
         const hop = this.props.hop;
         const alphaAcid = this.meanAlphaAcid(hop);
+        const linkURL = `/hops/${hop.id}`;
         return (
             <tr>
                 <td>{hop.id}</td>
@@ -23,6 +25,11 @@ class HopListRow extends Component {
                 <td>{hop.aromas}</td>
                 <td>{hop.brewing_role}</td>
                 <td>{alphaAcid}</td>
+                <td>
+                    <Link className="nav-link" to={linkURL} >
+                        about
+                    </Link>
+                </td>
             </tr>
         );
     }
