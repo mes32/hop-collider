@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class HopListPage extends Component {
+
+    componentDidMount() {
+        const action = { type: 'FETCH_HOPS' };
+        this.props.dispatch(action);
+    }
+
     render() {
         return (
             <div>
