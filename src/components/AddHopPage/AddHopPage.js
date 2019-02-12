@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 
 import './AddHopPage.css';
 
 class AddHopPage extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -12,8 +12,37 @@ class AddHopPage extends Component {
             aromas: '',
             brewing_role_id: '',
             alpha_acid_min: '',
-            alpha_acid_max: ''
+            alpha_acid_max: '',
+            beta_acid_min: '',
+            beta_acid_max: '',
+            cohumulone_min: '',
+            cohumulone_max: '',
+            total_oil_min: '',
+            total_oil_max: '',
+            beta_pinene_min: '',
+            beta_pinene_max: '',
+            myrcene_min: '',
+            myrcene_max: '',
+            linalool_min: '',
+            linalool_max: '',
+            caryophyllene_min: '',
+            caryophyllene_max: '',
+            farnesene_min: '',
+            farnesene_max: '',
+            humulene_min: '',
+            humulene_max: '',
+            geraniol_min: '',
+            geraniol_max: '',
+            selinene_min: '',
+            selinene_max: '',
+            other_oils_min: '',
+            other_oils_max: ''
         };
+    }
+
+    componentDidMount() {
+        const action = { type: 'FETCH_HOPS' };
+        this.props.dispatch(action);
     }
 
     changeInput = (event) => {
@@ -31,11 +60,12 @@ class AddHopPage extends Component {
     render() {
         return (
             <div>
+                {JSON.stringify(this.props.reduxStore.countries)}
                 <h2>Add Hop Variety</h2>
                 <form onSubmit={this.submit} className="add-hop-form">
                     <input onChange={this.changeInput} name="variety_name" placeholder="Variety Name" type="text" required />
                     <input onChange={this.changeInput} name="country_id" placeholder="Country ID" type="text" />
-                    <input onChange={this.changeInput} name="aromas" placeholder="Aromas" type="text" />
+                    <input onChange={this.changeInput} name="aromas" placeholder="Aroma Descriptors" type="text" />
                     <input onChange={this.changeInput} name="brewing_role_id" placeholder="Brewing Role ID" type="text" />
                     <input onChange={this.changeInput} name="alpha_acid_min" placeholder="Alpha Acid (min)" type="text" />
                     <input onChange={this.changeInput} name="alpha_acid_max" placeholder="Alpha Acid (max)" type="text" />
@@ -70,4 +100,5 @@ class AddHopPage extends Component {
     }
 }
 
-export default AddHopPage;
+const mapReduxStoreToProps = (reduxStore) => ({reduxStore});
+export default connect(mapReduxStoreToProps)(AddHopPage);

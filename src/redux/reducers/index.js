@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux';
+import countries from './countriesReducer';
 import errors from './errorsReducer';
+import hopUsage from './hopUsageReducer';
 import hops from './hopsReducer';
 import loginMode from './loginModeReducer';
 import user from './userReducer';
@@ -14,6 +16,8 @@ const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   loginMode, // will have a value of 'login' or 'registration' to control which screen is shown
   user, // will have an id and username if someone is logged in
+  countries,
+  hopUsage,
   hops, // An array of all hops in the server-side database
 });
 
