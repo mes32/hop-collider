@@ -33,7 +33,6 @@ class HopListPage extends Component {
                         )}
                     </tbody>
                 </table>
-                {JSON.stringify(this.props.reduxStore.hops)}
             </div>
         );
     }

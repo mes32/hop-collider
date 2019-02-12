@@ -7,7 +7,18 @@ function* fetchHops() {
         const hopsResponse = yield axios.get('api/hops');
         yield put({ type: 'SET_HOPS', payload: hopsResponse.data });
     } catch (error) {
-        const errorMessage = `Unable to fetch hops from server, ${error}`;
+        const errorMessage = `Unable to fetch hops from server. ${error}`;
+        console.log(errorMessage);
+        alert(errorMessage);
+    }
+}
+
+function* addHop(action) {
+    try {
+        yield axios.post('api/hops', action.payload);
+        yield put({ type: 'FETCH_HOPS' });
+    } catch (error) {
+        const errorMessage = `Unable to add hop to server. ${error}`;
         console.log(errorMessage);
         alert(errorMessage);
     }
@@ -19,7 +30,7 @@ function* deleteHop(action) {
         yield axios.delete(`/api/hops/${action.payload.id}`);
         yield put({ type: 'FETCH_HOPS' });
     } catch (error) {
-        const errorMessage = `Error unable to delete hop, ${error}`;
+        const errorMessage = `Unable to delete hop. ${error}`;
         console.log(errorMessage);
         alert(errorMessage);
     }
@@ -27,6 +38,7 @@ function* deleteHop(action) {
 
 function* hopsSaga() {
     yield takeLatest('FETCH_HOPS', fetchHops);
+    yield takeLatest('ADD_HOP', addHop);
     yield takeLatest('DELETE_HOP', deleteHop);
 }
 
