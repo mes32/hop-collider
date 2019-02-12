@@ -60,7 +60,7 @@ class AddHopPage extends Component {
     render() {
         return (
             <div>
-                {JSON.stringify(this.props.reduxStore.countries)}
+                {JSON.stringify(this.props.reduxStore.hopUsage)}
                 <h2>Add Hop Variety</h2>
                 <form onSubmit={this.submit} className="add-hop-form">
                     <input onChange={this.changeInput} name="variety_name" placeholder="Variety Name" type="text" required />
