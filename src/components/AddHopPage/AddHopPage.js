@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 import './AddHopPage.css';
+import BrewingRoleSelector from '../BrewingRoleSelector/BrewingRoleSelector';
 
 class AddHopPage extends Component {
     constructor(props) {
@@ -57,6 +58,13 @@ class AddHopPage extends Component {
         console.log(' - in submit');
     }
 
+    setBrewingRole = (newID) => {
+        this.setState({
+            ...this.state,
+            brewing_role_id: newID
+        });
+    }
+
     render() {
         return (
             <div>
@@ -66,7 +74,8 @@ class AddHopPage extends Component {
                     <input onChange={this.changeInput} name="variety_name" placeholder="Variety Name" type="text" required />
                     <input onChange={this.changeInput} name="country_id" placeholder="Country ID" type="text" />
                     <input onChange={this.changeInput} name="aromas" placeholder="Aroma Descriptors" type="text" />
-                    <input onChange={this.changeInput} name="brewing_role_id" placeholder="Brewing Role ID" type="text" />
+                    {/* <input onChange={this.changeInput} name="brewing_role_id" placeholder="Brewing Role ID" type="text" /> */}
+                    <BrewingRoleSelector setBrewingRole={this.setBrewingRole} />
                     <input onChange={this.changeInput} name="alpha_acid_min" placeholder="Alpha Acid (min)" type="text" />
                     <input onChange={this.changeInput} name="alpha_acid_max" placeholder="Alpha Acid (max)" type="text" />
                     <input onChange={this.changeInput} name="beta_acid_min" placeholder="Beta Acid (min)" type="text" />
