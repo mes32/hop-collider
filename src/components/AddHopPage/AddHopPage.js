@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
 
 import './AddHopPage.css';
 import BrewingRoleSelector from '../BrewingRoleSelector/BrewingRoleSelector';
@@ -41,11 +40,6 @@ class AddHopPage extends Component {
         };
     }
 
-    componentDidMount() {
-        const action = { type: 'FETCH_HOPS' };
-        this.props.dispatch(action);
-    }
-
     changeInput = (event) => {
         this.setState({
             ...this.state,
@@ -56,6 +50,7 @@ class AddHopPage extends Component {
     submit = (event) => {
         event.preventDefault();
         console.log(' - in submit');
+        console.log(this.state);
     }
 
     setBrewingRole = (newID) => {
@@ -68,13 +63,11 @@ class AddHopPage extends Component {
     render() {
         return (
             <div>
-                {JSON.stringify(this.props.reduxStore.hopUsage)}
                 <h2>Add Hop Variety</h2>
                 <form onSubmit={this.submit} className="add-hop-form">
                     <input onChange={this.changeInput} name="variety_name" placeholder="Variety Name" type="text" required />
                     <input onChange={this.changeInput} name="country_id" placeholder="Country ID" type="text" />
                     <input onChange={this.changeInput} name="aromas" placeholder="Aroma Descriptors" type="text" />
-                    {/* <input onChange={this.changeInput} name="brewing_role_id" placeholder="Brewing Role ID" type="text" /> */}
                     <BrewingRoleSelector setBrewingRole={this.setBrewingRole} />
                     <input onChange={this.changeInput} name="alpha_acid_min" placeholder="Alpha Acid (min)" type="text" />
                     <input onChange={this.changeInput} name="alpha_acid_max" placeholder="Alpha Acid (max)" type="text" />
@@ -109,5 +102,4 @@ class AddHopPage extends Component {
     }
 }
 
-const mapReduxStoreToProps = (reduxStore) => ({reduxStore});
-export default connect(mapReduxStoreToProps)(AddHopPage);
+export default AddHopPage;

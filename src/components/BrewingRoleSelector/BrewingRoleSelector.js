@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 class BrewingRoleSelector extends Component {
 
     componentDidMount() {
-        // const action = { type: 'FETCH_TAGS' };
-        // this.props.dispatch(action);
+        const action = { type: 'FETCH_HOP_USAGE' };
+        this.props.dispatch(action);
     }
 
     selected = (event) => {
@@ -14,11 +14,11 @@ class BrewingRoleSelector extends Component {
 
     render() {
         return (
-            <select onChange={this.selected} defaultValue="" required>
+            <select onChange={this.selected} defaultValue="">
                 <option value="" disabled hidden>( Select a Brewing Role )</option>
-                {/* {this.props.reduxStore.tags.map(
-                    (tag) => <option key={tag.id} value={tag.id}>{tag.name}</option>
-                )} */}
+                {this.props.reduxStore.hopUsage.map(
+                    (usage) => <option key={usage.id} value={usage.id}>{usage.description}</option>
+                )}
             </select>
         );
     }

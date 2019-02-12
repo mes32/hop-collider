@@ -8,8 +8,6 @@ function* fetchHops() {
         yield put({ type: 'SET_HOPS', payload: hopsResponse.data });
         const countriesResponse = yield axios.get('api/country');
         yield put({ type: 'SET_COUNTRIES', payload: countriesResponse.data });
-        const hopsUsageResponse = yield axios.get('api/brewing_role');
-        yield put({ type: 'SET_HOP_USAGE', payload: hopsUsageResponse.data });
     } catch (error) {
         const errorMessage = `Unable to fetch hops from server, ${error}`;
         console.log(errorMessage);
