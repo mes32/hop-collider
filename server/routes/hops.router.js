@@ -45,4 +45,24 @@ router.get('/:id', (req, res) => {
     });
 });
 
+// Route DELETE /api/hops/:id
+router.delete('/:id', (req, res) => {
+    if (req.isAuthenticated && req.user.is_admin) {
+        const id = req.params.id;
+        const queryText = `
+        DELETE FROM hops
+        WHERE id = $1;
+        `;
+        pool.query(queryText, [id]).then((queryResponse) => {
+            res.sendStatus(200);
+        }).catch((queryError) => {
+            const errorMessage = `SQL error using DELETE /api/hops/:id, ${queryError}`;
+            console.log(errorMessage);
+            res.sendStatus(500);
+        });
+    } else {
+        res.sendStatus(403);
+    }
+});
+
 module.exports = router;

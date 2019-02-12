@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 class AdminPageRow extends Component {
     editHop = (event) => {
@@ -7,7 +8,11 @@ class AdminPageRow extends Component {
     }
 
     deleteHop = (event) => {
-        console.log(`deleteHop() hop: ${JSON.stringify(this.props.hop.id)}`);
+        const action = {
+            type: 'DELETE_HOP',
+            payload: this.props.hop
+        };
+        this.props.dispatch(action);
     }
 
     render() {
@@ -37,4 +42,4 @@ class AdminPageRow extends Component {
     }
 }
 
-export default AdminPageRow;
+export default connect()(AdminPageRow);
