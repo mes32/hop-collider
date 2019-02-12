@@ -12,6 +12,20 @@ const UserPage = (props) => (
     </h1>
     <p>Your ID is: {props.user.id}</p>
     <LogOutButton className="log-in" />
+    <h2>Saved Hop Comparisons</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Date Created</th>
+          <th>Hops Compared</th>
+          <th>Load</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {/* TODO: map user's saved hop comparisons to <tr>'s */}
+      </tbody>
+    </table>
   </div>
 );
 

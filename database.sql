@@ -1,12 +1,14 @@
 DROP TABLE IF EXISTS hops;
 DROP TABLE IF EXISTS country;
 DROP TABLE IF EXISTS brewing_role;
+DROP TABLE IF EXISTS person;
 
 CREATE TABLE "person" 
 (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
+    "password" VARCHAR (1000) NOT NULL,
+    "is_admin" BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE country

@@ -47,3 +47,25 @@ input {
     border-bottom:1px solid #444; 
     cursor: pointer;
 }
+
+/* Style tables */
+table {
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+th, td {
+    padding: 4px 20px;
+}
+
+th {
+    background-color: #222222;
+    color: whitesmoke;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}

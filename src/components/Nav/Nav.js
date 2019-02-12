@@ -16,6 +16,9 @@ const Nav = (props) => (
         and call this link 'Login / Register' if they are not */}
         {props.user.id ? 'Home' : 'Login / Register'}
       </Link>
+      <Link className="nav-link" to="/hop_comparison">
+        Hop Comparison
+      </Link>
       <Link className="nav-link" to="/hop_list">
         Hop List
       </Link>

@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class HopVarietyPage extends Component {
-
-    // Needs some life-cycle function love
-    // propsDidChange()
-    
     
     constructor(props) {
         super(props);
@@ -30,6 +26,9 @@ class HopVarietyPage extends Component {
         // });
     }
 
+    // Needs some life-cycle function love
+    // propsDidChange()
+
     render() {
         return (
             <div>
@@ -37,6 +36,7 @@ class HopVarietyPage extends Component {
                 <p>id: {JSON.stringify(this.props.match.params.id)}</p>
                 <p>params: {JSON.stringify(this.props.match.params)}</p>
                 <p>match: {JSON.stringify(this.props.match)}</p>
+                <p>hop array: {JSON.stringify(this.props.reduxStore.hops)}</p>
             </div>
         );
     }

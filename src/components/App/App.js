@@ -9,8 +9,10 @@ import { connect } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
+import HopComparisonPage from '../HopComparisonPage/HopComparisonPage';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
+import AdminPage from '../AdminPage/AdminPage';
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import HopListPage from '../HopListPage/HopListPage';
@@ -47,8 +49,18 @@ class App extends Component {
               path="/home"
               component={UserPage}
             />
+            <ProtectedRoute
+              exact
+              path="/admin"
+              component={AdminPage}
+            />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
+            <Route
+              exact
+              path="/hop_comparison"
+              component={HopComparisonPage}
+            />
             <Route
               exact
               path="/hop_list"
