@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import './AddHopPage.css';
 import BrewingRoleSelector from '../BrewingRoleSelector/BrewingRoleSelector';
+import CountrySelector from '../CountrySelector/CountrySelector';
 
 class AddHopPage extends Component {
     constructor(props) {
@@ -53,6 +54,13 @@ class AddHopPage extends Component {
         console.log(this.state);
     }
 
+    setCountry = (newID) => {
+        this.setState({
+            ...this.state,
+            country_id: newID
+        });
+    }
+
     setBrewingRole = (newID) => {
         this.setState({
             ...this.state,
@@ -66,7 +74,7 @@ class AddHopPage extends Component {
                 <h2>Add Hop Variety</h2>
                 <form onSubmit={this.submit} className="add-hop-form">
                     <input onChange={this.changeInput} name="variety_name" placeholder="Variety Name" type="text" required />
-                    <input onChange={this.changeInput} name="country_id" placeholder="Country ID" type="text" />
+                    <CountrySelector setCountry={this.setCountry} />
                     <input onChange={this.changeInput} name="aromas" placeholder="Aroma Descriptors" type="text" />
                     <BrewingRoleSelector setBrewingRole={this.setBrewingRole} />
                     <input onChange={this.changeInput} name="alpha_acid_min" placeholder="Alpha Acid (min)" type="text" />
