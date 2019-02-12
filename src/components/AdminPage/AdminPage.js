@@ -11,7 +11,7 @@ class AdminPage extends Component {
     }
 
     addHop = (event) => {
-        console.log(' - Pressed add hop variety button');
+        this.props.history.push('/add_hop');
     }
 
     render() {
