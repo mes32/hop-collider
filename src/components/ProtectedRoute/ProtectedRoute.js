@@ -1,6 +1,8 @@
 import React from 'react';
 import {Route} from 'react-router-dom'
 import {connect} from 'react-redux';
+
+import ForbiddenPage from '../ForbiddenPage/ForbiddenPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
@@ -22,12 +24,19 @@ const ProtectedRoute = (props) => {
     component: ComponentToProtect,
     user,
     loginMode,
+    adminRoute,
     ...otherProps
   } = props;
 
   let ComponentToShow;
 
-  if(user.id) {
+  if (adminRoute) {
+    if (!user.id || !user.is_admin) {
+      ComponentToShow = ForbiddenPage;
+    } else {
+      ComponentToShow = ComponentToProtect;
+    }
+  } else if (user.id) {
     // if the user is logged in (only logged in users have ids)
     // show the component that is protected
     ComponentToShow = ComponentToProtect;

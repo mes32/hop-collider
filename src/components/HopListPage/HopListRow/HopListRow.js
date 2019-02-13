@@ -26,7 +26,7 @@ class HopListRow extends Component {
                 <td>{hop.brewing_role}</td>
                 <td>{alphaAcid}</td>
                 <td>
-                    <Link className="nav-link" to={linkURL} >
+                    <Link to={linkURL} >
                         about
                     </Link>
                 </td>

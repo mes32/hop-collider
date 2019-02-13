@@ -1,0 +1,14 @@
+.add-hop-form {
+    /* background-color: #666666; */
+    width: 50%;
+    height: 100%;
+    margin: 20px auto;
+    padding: 25px;
+    border-radius: 6px;
+}
+
+.add-hop-form input {
+    margin: 4px;
+    margin-bottom: 4px;
+    width: 45%;
+}
