@@ -105,11 +105,19 @@ class AddHopPage extends Component {
                 hopToSend[attribute] = null;
             } 
         }
-        const action = {
-            type: 'ADD_HOP',
-            payload: hopToSend,
-        };
-        this.props.dispatch(action);
+        if (this.props.match.params.id) {
+            const action = {
+                type: 'UPDATE_HOP',
+                payload: hopToSend,
+            };
+            this.props.dispatch(action);
+        } else {
+            const action = {
+                type: 'ADD_HOP',
+                payload: hopToSend,
+            };
+            this.props.dispatch(action);
+        }
         this.setState(DEFAULT_STATE);
     }
 

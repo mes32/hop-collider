@@ -100,6 +100,62 @@ router.post('/', (req, res) => {
     }
 });
 
+// Route PUT /api/hops/
+router.put('/', (req, res) => {
+    if (req.isAuthenticated && req.user.is_admin) {
+        const hop = req.body;
+        const queryArray = [
+            hop.variety_name, hop.country_id,
+            hop.aromas, hop.brewing_role_id,
+            hop.alpha_acid_min, hop.alpha_acid_max,
+            hop.beta_acid_min, hop.beta_acid_max,
+            hop.cohumulone_min, hop.cohumulone_max,
+            hop.total_oil_min, hop.total_oil_max,
+            hop.beta_pinene_min, hop.beta_pinene_max,
+            hop.myrcene_min, hop.myrcene_max,
+            hop.linalool_min, hop.linalool_max,
+            hop.caryophyllene_min, hop.caryophyllene_max,
+            hop.farnesene_min, hop.farnesene_max,
+            hop.humulene_min, hop.humulene_max,
+            hop.geraniol_min, hop.geraniol_max,
+            hop.selinene_min, hop.selinene_max,
+            hop.other_oils_min, hop.other_oils_max,
+            hop.id
+        ];
+        const queryText = `
+        UPDATE hops
+        SET
+            "variety_name" = $1, "country_id" = $2, 
+            "aromas" = $3, "brewing_role_id" = $4, 
+            "alpha_acid_min" = $5, "alpha_acid_max" = $6, 
+            "beta_acid_min" = $7, "beta_acid_max" = $8, 
+            "cohumulone_min" = $9, "cohumulone_max" = $10, 
+            "total_oil_min" = $11, "total_oil_max" = $12, 
+            "beta_pinene_min" = $13, "beta_pinene_max" = $14, 
+            "myrcene_min" = $15, "myrcene_max" = $16, 
+            "linalool_min" = $17, "linalool_max" = $18, 
+            "caryophyllene_min" = $19, "caryophyllene_max" = $20, 
+            "farnesene_min" = $21, "farnesene_max" = $22, 
+            "humulene_min" = $23, "humulene_max" = $24, 
+            "geraniol_min" = $25, "geraniol_max" = $26, 
+            "selinene_min" = $27, "selinene_max" = $28, 
+            "other_oils_min" = $29, "other_oils_max" = $30
+        WHERE
+            id = $31
+        ;
+        `;
+        pool.query(queryText, queryArray).then((queryResponse) => {
+            res.sendStatus(200);
+        }).catch((queryError) => {
+            const errorMessage = `SQL error using PUT /api/hops/. ${queryError}`;
+            console.log(errorMessage);
+            res.sendStatus(500);
+        });
+    } else {
+        res.sendStatus(403);
+    }
+});
+
 // Route DELETE /api/hops/:id
 router.delete('/:id', (req, res) => {
     if (req.isAuthenticated && req.user.is_admin) {
