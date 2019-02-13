@@ -5,42 +5,78 @@ import './AddHopPage.css';
 import BrewingRoleSelector from '../BrewingRoleSelector/BrewingRoleSelector';
 import CountrySelector from '../CountrySelector/CountrySelector';
 
+const DEFAULT_STATE = {
+    variety_name: null,
+    country_id: null,
+    aromas: null,
+    brewing_role_id: null,
+    alpha_acid_min: null,
+    alpha_acid_max: null,
+    beta_acid_min: null,
+    beta_acid_max: null,
+    cohumulone_min: null,
+    cohumulone_max: null,
+    total_oil_min: null,
+    total_oil_max: null,
+    beta_pinene_min: null,
+    beta_pinene_max: null,
+    myrcene_min: null,
+    myrcene_max: null,
+    linalool_min: null,
+    linalool_max: null,
+    caryophyllene_min: null,
+    caryophyllene_max: null,
+    farnesene_min: null,
+    farnesene_max: null,
+    humulene_min: null,
+    humulene_max: null,
+    geraniol_min: null,
+    geraniol_max: null,
+    selinene_min: null,
+    selinene_max: null,
+    other_oils_min: null,
+    other_oils_max: null
+};
+
 class AddHopPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            variety_name: null,
-            country_id: null,
-            aromas: null,
-            brewing_role_id: null,
-            alpha_acid_min: null,
-            alpha_acid_max: null,
-            beta_acid_min: null,
-            beta_acid_max: null,
-            cohumulone_min: null,
-            cohumulone_max: null,
-            total_oil_min: null,
-            total_oil_max: null,
-            beta_pinene_min: null,
-            beta_pinene_max: null,
-            myrcene_min: null,
-            myrcene_max: null,
-            linalool_min: null,
-            linalool_max: null,
-            caryophyllene_min: null,
-            caryophyllene_max: null,
-            farnesene_min: null,
-            farnesene_max: null,
-            humulene_min: null,
-            humulene_max: null,
-            geraniol_min: null,
-            geraniol_max: null,
-            selinene_min: null,
-            selinene_max: null,
-            other_oils_min: null,
-            other_oils_max: null
-        };
+        this.state = DEFAULT_STATE;
     }
+
+    componentDidMount() {
+        const id = this.props.match.params.id;
+        const action = { type: 'FETCH_FOCUS_HOP', payload: id };
+        this.props.dispatch(action);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        const prevHop = prevProps.reduxStore.focusHop;
+        const focusHop = this.props.reduxStore.focusHop;
+        // this.props.reduxStore.focusHop
+        // console.log(`focusHop: ${JSON.stringify(focusHop)}`);
+        // console.log(`focusHop.variety_name: ${focusHop.variety_name}`);
+        // variety_name
+        if (focusHop !== prevHop) {
+            this.loadState(focusHop);
+        }
+    }
+
+    loadState = (hop) => {
+        if (hop) {
+            this.setState({
+                ...hop
+            });
+        }
+    }
+
+    // setForm = () => {
+
+    // }
+
+    // clearForm = () => {
+    //     this.refs.variety_name.value = '';
+    // }
 
     changeInput = (event) => {
         let newValue = event.target.value;
@@ -60,6 +96,7 @@ class AddHopPage extends Component {
             payload: this.state,
         };
         this.props.dispatch(action);
+        // this.clearForm();
     }
 
     setCountry = (newID) => {
@@ -79,6 +116,7 @@ class AddHopPage extends Component {
     render() {
         return (
             <div>
+                {JSON.stringify(this.props.reduxStore.focusHop)}
                 <h2>Add Hop Variety</h2>
                 <form onSubmit={this.submit} className="add-hop-form">
                     <input onChange={this.changeInput} name="variety_name" placeholder="Variety Name" type="text" required />
@@ -118,4 +156,5 @@ class AddHopPage extends Component {
     }
 }
 
-export default connect()(AddHopPage);
+const mapReduxStoreToProps = (reduxStore) => ({ reduxStore });
+export default connect(mapReduxStoreToProps)(AddHopPage);

@@ -1,6 +1,7 @@
 import { all } from 'redux-saga/effects';
 
 import countriesSaga from './countriesSaga';
+import focusHopSaga from './focusHopSaga';
 import hopUsageSaga from './hopUsageSaga';
 import hopsSaga from './hopsSaga';
 import loginSaga from './loginSaga';
@@ -17,6 +18,7 @@ import userSaga from './userSaga';
 export default function* rootSaga() {
   yield all([
     countriesSaga(),
+    focusHopSaga(),
     hopUsageSaga(),
     hopsSaga(),
     loginSaga(),

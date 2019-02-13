@@ -34,7 +34,7 @@ class AdminPage extends Component {
                     </thead>
                     <tbody>
                         {this.props.reduxStore.hops.map(hop =>
-                            <AdminPageRow key={hop.id} hop={hop} />
+                            <AdminPageRow key={hop.id} history={this.props.history} hop={hop} />
                         )}
                     </tbody>
                 </table>
