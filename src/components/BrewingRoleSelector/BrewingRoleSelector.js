@@ -14,7 +14,7 @@ class BrewingRoleSelector extends Component {
 
     render() {
         return (
-            <select onChange={this.selected} defaultValue="">
+            <select onChange={this.selected} value={this.props.value}>
                 <option value="" disabled hidden>( Select a Brewing Role )</option>
                 {this.props.reduxStore.hopUsage.map(
                     (usage) => <option key={usage.id} value={usage.id}>{usage.description}</option>

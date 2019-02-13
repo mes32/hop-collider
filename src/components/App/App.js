@@ -63,7 +63,7 @@ class App extends Component {
               component={AddHopPage}
             />
             <Route
-              exact path="/edit_hop/:id"
+              exact path="/update_hop/:id"
               component={AddHopPage}
             />
             <Route

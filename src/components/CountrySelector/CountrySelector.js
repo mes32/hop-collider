@@ -14,7 +14,7 @@ class CountrySelector extends Component {
 
     render() {
         return (
-            <select onChange={this.selected} defaultValue="">
+            <select onChange={this.selected} value={this.props.value}>
                 <option value="" disabled hidden>( Select a Country of Origin )</option>
                 {this.props.reduxStore.countries.map(
                     (country) => <option key={country.id} value={country.id}>{country.country_name}</option>
