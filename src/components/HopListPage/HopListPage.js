@@ -18,7 +18,6 @@ class HopListPage extends Component {
                 <table>
                     <thead>
                         <tr>
-                            <th>id</th>
                             <th>Variety Name</th>
                             <th>Country of Origin</th>
                             <th>Aromas</th>

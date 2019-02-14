@@ -27,6 +27,7 @@ class AdminPage extends Component {
                         <tr>
                             <th>id</th>
                             <th>Variety Name</th>
+                            <th>Country of Origin</th>
                             <th>About</th>
                             <th>Edit</th>
                             <th>Delete</th>

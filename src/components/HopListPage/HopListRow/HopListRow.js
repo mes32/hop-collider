@@ -19,7 +19,6 @@ class HopListRow extends Component {
         const linkURL = `/hops/${hop.id}`;
         return (
             <tr>
-                <td>{hop.id}</td>
                 <td>{hop.variety_name}</td>
                 <td>{hop.country}</td>
                 <td>{hop.aromas}</td>

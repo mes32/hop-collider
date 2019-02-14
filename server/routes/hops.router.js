@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
     FROM hops
     LEFT JOIN country ON hops.country_id = country.id
     LEFT JOIN brewing_role ON hops.brewing_role_id = brewing_role.id
-    ORDER BY hops.variety_name;
+    ORDER BY hops.variety_name, country;
     `;
     pool.query(queryText).then((queryResponse) => {
         res.send(queryResponse.rows);
