@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import HopCompoundChart from '../HopCompoundChart/HopCompoundChart';
+
 class HopComparisonPage extends Component {
     componentDidMount() {
         const action = { type: 'FETCH_HOPS' };
@@ -27,6 +29,7 @@ class HopComparisonPage extends Component {
                         (hop) => <option key={hop.id} value={hop.id}>{hop.variety_name} ({hop.country})</option>
                     )}
                 </select>
+                <HopCompoundChart hops={this.props.reduxStore.hops} />
             </div>
         );
     }
