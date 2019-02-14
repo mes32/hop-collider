@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import './HopVarietyPage.css';
+
 const DEFAULT_HOP = {
     variety_name: '[ Hop Variety Name ]',
     country: null,
@@ -52,7 +54,7 @@ class HopVarietyPage extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        // Note: used some example code from stackoverflow.com for this check on URL changes
+        // Note: I used some example code from stackoverflow.com for this check on URL changes
         // https://stackoverflow.com/questions/52252353/re-render-same-component-on-url-change-in-react
         // user: c6754
         if (this.props.match.params.id !== prevProps.match.params.id) {
@@ -63,8 +65,74 @@ class HopVarietyPage extends Component {
     }
 
     getCountry = () => {
-        if (this.state.country !== '') {
-            return <h3>{this.state.country}</h3>;
+        if (this.state.country) {
+            return (<h3>{this.state.country}</h3>);
+        }
+    }
+
+    getAromas = () => {
+        if (this.state.aromas) {
+            return (
+                <div>
+                    <h4>Aroma Profile:</h4>
+                    <p>{this.state.aromas}</p>
+                </div>
+            );
+        }
+    }
+
+    getUsage = () => {
+        if (this.state.brewing_role) {
+            return (
+                <div>
+                    <h4>Typical Usage:</h4>
+                    <p>{this.state.brewing_role}</p>
+                </div>
+            );
+        }
+    }
+
+    getDescription = () => {
+        return (
+            <p>
+            Secondary fermentation degrees plato units of bitterness, cask conditioned ale ibu real ale pint glass craft beer. krausen goblet grainy ibu brewhouse lagering finishing hops. Trappist, black malt chocolate malt balthazar gravity dextrin saccharification trappist final gravity. Aau scotch ale, adjunct. hops bung infusion, cask conditioning pitching malt extract.
+            </p>
+        );
+    }
+
+    displayRange = (label, min, max) => {
+        if (min && max) {
+            return (
+                <p><span className="bold-text">{label}:</span> {Number(min).toFixed(1)} - {Number(max).toFixed(1)}</p>
+            );
+        } else if (min) {
+            return (
+                <p><span className="bold-text">{label}:</span> {Number(min).toFixed(1)}</p>
+            );
+        }
+    }
+
+    displayOilCompositionRow = (label, min, max) => {
+        if (min && max) {
+            return (
+                <tr>
+                    <td><span className="bold-text">{label}</span></td>
+                    <td>{Number(min).toFixed(1)}</td>
+                    <td>-</td>
+                    <td>{Number(max).toFixed(1)}</td>
+                    <td>% of total oil</td>
+                </tr>
+            );
+        } else if (min) {
+            return (
+                <tr>
+                    <td><span className="bold-text">{label}</span></td>
+                    <td>{Number(min).toFixed(1)}</td>
+                    <td></td>
+                    <td></td>
+                    <td>% of total oil</td>
+                </tr>
+            );
         }
     }
 
@@ -73,6 +141,26 @@ class HopVarietyPage extends Component {
             <div>
                 <h2>{this.state.variety_name}</h2>
                 {this.getCountry()}
+                {this.getAromas()}
+                {this.getUsage()}
+                {this.getDescription()}
+                {this.displayRange('Alpha Acid (%)', this.state.alpha_acid_min, this.state.alpha_acid_max)}
+                {this.displayRange('Beta Acid (%)', this.state.beta_acid_min, this.state.beta_acid_max)}
+                {this.displayRange('Cohumulone (% of Alpha Acid)', this.state.cohumulone_min, this.state.cohumulone_max)}
+                {this.displayRange('Total Oil (mL/100g)', this.state.total_oil_min, this.state.total_oil_max)}
+                <h3>Essential Oil Composition</h3>
+                <table className="oil-composition-table">
+                    <tbody>
+                        {this.displayOilCompositionRow('B-pinene', this.state.beta_pinene_min, this.state.beta_pinene_max)}
+                        {this.displayOilCompositionRow('Myrcene', this.state.myrcene_min, this.state.myrcene_max)}
+                        {this.displayOilCompositionRow('Linalool', this.state.linalool_min, this.state.linalool_max)}
+                        {this.displayOilCompositionRow('Caryophyllene', this.state.caryophyllene_min, this.state.caryophyllene_max)}
+                        {this.displayOilCompositionRow('Farnesene', this.state.farnesene_min, this.state.farnesene_max)}
+                        {this.displayOilCompositionRow('Geraniol', this.state.geraniol_min, this.state.geraniol_max)}
+                        {this.displayOilCompositionRow('Selinene', this.state.selinene_min, this.state.selinene_max)}
+                        {this.displayOilCompositionRow('Other Oils', this.state.other_oils_min, this.state.other_oils_max)}
+                    </tbody>
+                </table>
             </div>
         );
     }

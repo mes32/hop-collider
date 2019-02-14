@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 class AdminPageRow extends Component {
     editHop = (event) => {
-        this.props.history.push(`edit_hop/${this.props.hop.id}`);
+        this.props.history.push(`update_hop/${this.props.hop.id}`);
     }
 
     deleteHop = (event) => {
