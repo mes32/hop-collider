@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 
 const DEFAULT_HOP = {
     variety_name: '[ Hop Variety Name ]',
-    country_id: null,
+    country: null,
     aromas: null,
-    brewing_role_id: null,
+    brewing_role: null,
     alpha_acid_min: null,
     alpha_acid_max: null,
     beta_acid_min: null,
@@ -38,36 +38,41 @@ class HopVarietyPage extends Component {
     
     constructor(props) {
         super(props);
-        this.state = {
-            hop: DEFAULT_HOP
-        };
+        this.state = DEFAULT_HOP;
     }
 
-    componentDidMount() {
+    fetchHop = () => {
         const id = this.props.match.params.id;
         const action = { type: 'FETCH_FOCUS_HOP', payload: id };
         this.props.dispatch(action);
     }
 
+    componentDidMount() {
+        this.fetchHop();
+    }
+
     componentDidUpdate(prevProps, prevState) {
-        const prevHop = prevProps.reduxStore.focusHop;
-        const hop = this.props.reduxStore.focusHop;
-        console.log('hop:', hop.variety_name);
-        if (hop !== prevHop) {
-            this.setState({
-                hop: hop}
-            );
+        // Note: used some example code from stackoverflow.com for this check on URL changes
+        // https://stackoverflow.com/questions/52252353/re-render-same-component-on-url-change-in-react
+        // user: c6754
+        if (this.props.match.params.id !== prevProps.match.params.id) {
+            this.fetchHop();
+        } else if (this.props.reduxStore.focusHop !== prevProps.reduxStore.focusHop) {
+            this.setState(this.props.reduxStore.focusHop);
+        }
+    }
+
+    getCountry = () => {
+        if (this.state.country !== '') {
+            return <h3>{this.state.country}</h3>;
         }
     }
 
     render() {
         return (
             <div>
-                <h2>{this.state.hop.variety_name}</h2>
-                <p>id: {JSON.stringify(this.props.match.params.id)}</p>
-                <p>params: {JSON.stringify(this.props.match.params)}</p>
-                <p>match: {JSON.stringify(this.props.match)}</p>
-                <p>hop array: {JSON.stringify(this.props.reduxStore.hops)}</p>
+                <h2>{this.state.variety_name}</h2>
+                {this.getCountry()}
             </div>
         );
     }
