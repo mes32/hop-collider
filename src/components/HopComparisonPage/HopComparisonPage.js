@@ -8,9 +8,9 @@ class HopComparisonPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, this.props.reduxStore.focusHop),
-            betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, this.props.reduxStore.focusHop),
-            cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, this.props.reduxStore.focusHop)
+            alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, [this.props.reduxStore.focusHop]),
+            betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, [this.props.reduxStore.focusHop]),
+            cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, [this.props.reduxStore.focusHop])
         };
     }
 
@@ -20,11 +20,11 @@ class HopComparisonPage extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.props.reduxStore.hops !== prevProps.reduxStore.hops) {
+        if (this.props.reduxStore.hops !== prevProps.reduxStore.hops || this.props.reduxStore.focusHop !== prevProps.reduxStore.focusHop) {
             this.setState({
-                alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, this.props.reduxStore.focusHop),
-                betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, this.props.reduxStore.focusHop),
-                cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, this.props.reduxStore.focusHop)
+                alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, [this.props.reduxStore.focusHop]),
+                betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, [this.props.reduxStore.focusHop]),
+                cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, [this.props.reduxStore.focusHop])
             });
         }
     }

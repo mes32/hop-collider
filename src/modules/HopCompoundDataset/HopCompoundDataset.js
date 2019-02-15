@@ -1,19 +1,18 @@
 const NUM_INTERVALS = 300.0;
 
 class HopCompoundDataset {
-    constructor(compound, hops, focusHop) {
+    constructor(compound, hops, selectedHops) {
         this.maximum = this.getMaximum(compound, hops);
         this.interval = this.maximum / NUM_INTERVALS;
         this.labels = this.getLabels(this.interval);
-        const cumulativeDist = this.sumPDF(compound, hops, this.interval);
+
+        const cumulativeDist = this.sumPDF(compound, hops);
         const normalizedDist = this.normalize(cumulativeDist);
         this.distribution = {
             label: `Distribution of ${compound} for All Hops`,
             data: normalizedDist,
         };
-        this.focusData = [
-
-        ];
+        this.selectedData = this.getSelectedArray(compound, selectedHops);
     }
 
     getMaximum = (compound, hops) => {
@@ -51,11 +50,11 @@ class HopCompoundDataset {
 
     // For each sample interval compute the sum of all hop p.d.f.
     // and set the corresponding label
-    sumPDF = (compound, hops, interval) => {
+    sumPDF = (compound, hops) => {
         let sumArray = new Array(NUM_INTERVALS);
         for (let i = 0; i < NUM_INTERVALS; i++) {
             sumArray[i] = 0;
-            const x = i * interval;
+            const x = i * this.interval;
             for (let j = 0; j < hops.length; j++) {
                 const hop = hops[j];
                 const compound_min = Number(hop[`${compound}_min`]);
@@ -86,6 +85,34 @@ class HopCompoundDataset {
             return array;
         }
         return array.map((sample) => sample / maxDensity);
+    }
+
+    getSelectedArray = (compound, selected) => {
+        console.log(selected);
+        let datasetArray = [];
+        for (let i = 0; i < selected.length; i++) {
+            const y = (i + 1) / (selected.length + 1);
+            datasetArray.push(this.getSelected(compound, selected[i], y));
+        }
+        return datasetArray;
+    }
+
+    getSelected = (compound, hop, y) => {
+        const max = Number(hop[`${compound}_max`]);
+        const min = Number(hop[`${compound}_min`]);
+        let selectedArray = new Array(NUM_INTERVALS);
+        for (let i = 0; i < NUM_INTERVALS; i++) {
+            const x = i * this.interval;
+            if (x >= min && x <= max) {
+                selectedArray[i] = y;
+            } else {
+                selectedArray[i] = NaN;
+            }
+        }
+        return {
+            label: hop.variety_name,
+            data: selectedArray,
+        };
     }
 }
 

@@ -8,17 +8,7 @@ class HopCompoundChart extends Component {
         super(props);
         this.state = {
             labels: this.props.data.labels,
-            datasets: [
-                {
-                    label: this.props.data.distribution.label,
-                    data: this.props.data.distribution.data,
-                    borderColor: 'rgba(0, 0, 0, 0)',
-                    backgroundColor: 'rgba(200, 200, 200, 0.6)',
-                    pointRadius: 0,
-                    fill: true,
-                    lineTension: 0
-                }
-            ],
+            datasets: this.getDatasets()
         };
     }
 
@@ -26,16 +16,43 @@ class HopCompoundChart extends Component {
         if (this.props.data !== prevProps.data) {
             this.setState({
                 labels: this.props.data.labels,
-                datasets: [
-                    {
-                        label: this.props.data.distribution.label,
-                        data: this.props.data.distribution.data,
-                        backgroundColor: 'rgba(200, 200, 200, 0.6)',
-                        pointRadius: 0,
-                    }
-                ],
+                datasets: this.getDatasets()
             });
         }
+    }
+
+    getDatasets = () => {
+        let datasets = [];
+        for (let selected of this.props.data.selectedData) {
+            datasets.push(this.getSelected(selected));
+        }
+        datasets.push(this.getCumulativeDist());
+        return datasets;
+    }
+
+    getSelected = (selected) => {
+        return {
+            label: selected.label,
+            data: selected.data,
+            type: 'line',
+            backgroundColor: 'rgba(200, 200, 200, 0)',
+            borderColor: 'rgba(100, 100, 250, 1)',
+            borderWidth: 5,
+            pointRadius: 0,
+            pointHoverRadius: 0,
+        }
+    }
+
+    getCumulativeDist = () => {
+        return {
+            label: this.props.data.distribution.label,
+            data: this.props.data.distribution.data,
+            borderColor: 'rgba(0, 0, 0, 0)',
+            backgroundColor: 'rgba(200, 200, 200, 0.6)',
+            pointRadius: 0,
+            fill: true,
+            lineTension: 0
+        };
     }
 
     render() {
