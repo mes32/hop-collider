@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import './HopComparisonControlPane.css';
-
 class HopComparisonControlPane extends Component {
     render() {
         return (

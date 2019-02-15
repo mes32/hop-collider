@@ -1,0 +1,16 @@
+.hop-comparison-div {
+    height: 80vh;
+    overflow: hidden;
+}
+
+.control-pane-div {
+    height: 80vh;
+    width: 35vw;
+    background-color: brown;
+    float: left;
+}
+
+.scroll-pane-div {
+    height: 80vh;
+    overflow: scroll;
+}
