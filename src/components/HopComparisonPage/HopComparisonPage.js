@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import HopComparisonControlPane from '../HopComparisonControlPane/HopComparisonControlPane';
 import HopCompoundDataset from '../../modules/HopCompoundDataset/HopCompoundDataset';
 import HopCompoundChart from '../HopCompoundChart/HopCompoundChart';
 
@@ -42,6 +43,7 @@ class HopComparisonPage extends Component {
     render() {
         return (
             <div>
+                <HopComparisonControlPane />
                 <h2>Hop Comparison</h2>
                 <select onChange={this.selectHop} defaultValue="">
                     <option value="">-- Select a Hop --</option>

@@ -21,6 +21,12 @@ class HopCompoundChart extends Component {
         }
     }
 
+    // datasetKeyProvider() {
+    //     // Note: I don't think this is the right way to address this warning
+    //     // [react-chartjs-2] Warning: Each dataset needs a unique key. By default, the "label" property on each dataset is used. Alternatively, you may provide a "datasetKeyProvider" as a prop that returns a unique key.
+    //     return Math.random();
+    // }
+
     getDatasets = () => {
         let datasets = [];
         for (let selected of this.props.data.selectedData) {
@@ -61,6 +67,7 @@ class HopCompoundChart extends Component {
                 <div className="chart">
                     <Line
                         data={this.state}
+                        // datasetKeyProvider={this.datasetKeyProvider}
                         width={100}
                         height={60}
                         options={{
