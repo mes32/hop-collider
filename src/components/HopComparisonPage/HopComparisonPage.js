@@ -1,12 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import HopCompoundDataset from '../../modules/HopCompoundDataset/HopCompoundDataset';
 import HopCompoundChart from '../HopCompoundChart/HopCompoundChart';
 
 class HopComparisonPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, this.props.reduxStore.focusHop),
+            betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, this.props.reduxStore.focusHop),
+            cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, this.props.reduxStore.focusHop)
+        };
+    }
+
     componentDidMount() {
         const action = { type: 'FETCH_HOPS' };
         this.props.dispatch(action);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.reduxStore.hops !== prevProps.reduxStore.hops) {
+            this.setState({
+                alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, this.props.reduxStore.focusHop),
+                betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, this.props.reduxStore.focusHop),
+                cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, this.props.reduxStore.focusHop)
+            });
+        }
     }
 
     selectHop = (event) => {
@@ -29,7 +49,9 @@ class HopComparisonPage extends Component {
                         (hop) => <option key={hop.id} value={hop.id}>{hop.variety_name} ({hop.country})</option>
                     )}
                 </select>
-                <HopCompoundChart hops={this.props.reduxStore.hops} />
+                <HopCompoundChart data={this.state.alphaAcidData} />
+                <HopCompoundChart data={this.state.betaAcidData} />
+                <HopCompoundChart data={this.state.cohumuloneData} />
             </div>
         );
     }

@@ -1,23 +1,38 @@
 import React, { Component } from 'react';
-import { Bar, Line } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 
 import './HopCompoundChart.css';
-
-const numIntervals = 200;
 
 class HopCompoundChart extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            labels: [''],
+            labels: this.props.data.labels,
             datasets: [
                 {
-                    label: '',
-                    data: [],
+                    label: this.props.data.distribution.label,
+                    data: this.props.data.distribution.data,
                     backgroundColor: 'rgba(200, 200, 200, 0.6)',
+                    pointRadius: 0,
                 }
             ],
         };
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.data !== prevProps.data) {
+            this.setState({
+                labels: this.props.data.labels,
+                datasets: [
+                    {
+                        label: this.props.data.distribution.label,
+                        data: this.props.data.distribution.data,
+                        backgroundColor: 'rgba(200, 200, 200, 0.6)',
+                        pointRadius: 0,
+                    }
+                ],
+            });
+        }
     }
 
     render() {
