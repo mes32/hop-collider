@@ -12,8 +12,11 @@ class HopCompoundChart extends Component {
                 {
                     label: this.props.data.distribution.label,
                     data: this.props.data.distribution.data,
+                    borderColor: 'rgba(0, 0, 0, 0)',
                     backgroundColor: 'rgba(200, 200, 200, 0.6)',
                     pointRadius: 0,
+                    fill: true,
+                    lineTension: 0
                 }
             ],
         };

@@ -1,4 +1,4 @@
-const NUM_INTERVALS = 200.0;
+const NUM_INTERVALS = 300.0;
 
 class HopCompoundDataset {
     constructor(compound, hops, focusHop) {
@@ -21,14 +21,15 @@ class HopCompoundDataset {
             return 0;
         }
 
-        const compoundsMax = hops.map(hop => hop[`${compound}_max`]);
-        const compoundsMin = hops.map(hop => hop[`${compound}_min`]);
+        const compoundsMax = hops.map(hop => Number(hop[`${compound}_max`]));
+        const compoundsMin = hops.map(hop => Number(hop[`${compound}_min`]));
         
         let maximum = compoundsMax[0];
         for (let i = 0; i < hops.length; i++) {
             if (compoundsMax[i] > maximum) {
                 maximum = compoundsMax[i];
-            } else if (compoundsMin[i] > maximum) {
+            }
+            if (compoundsMin[i] > maximum) {
                 maximum = compoundsMin[i];
             }
         }
