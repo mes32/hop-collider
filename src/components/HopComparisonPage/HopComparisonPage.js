@@ -45,10 +45,10 @@ class HopComparisonPage extends Component {
             const hop = this.props.reduxStore.hops.find(element => element.id === parseInt(id));
             if (hop) {
                 this.setState({
-                    selectedHops: [hop],
-                    alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, [hop]),
-                    betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, [hop]),
-                    cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, [hop]),
+                    selectedHops: [...this.state.selectedHops, hop],
+                    alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, [...this.state.selectedHops, hop]),
+                    betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, [...this.state.selectedHops, hop]),
+                    cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, [...this.state.selectedHops, hop]),
                 });
             }
         }

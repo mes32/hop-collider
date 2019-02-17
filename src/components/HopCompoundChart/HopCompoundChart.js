@@ -3,6 +3,21 @@ import { Line } from 'react-chartjs-2';
 
 import './HopCompoundChart.css';
 
+const SELECTED_COLORS = [
+    'rgba(0, 84, 165, 1)', 
+    'rgba(243, 101, 35, 1)',
+    'rgba(0, 166, 82, 1)',
+    'rgba(146, 39, 143, 1)',
+    'rgba(254, 242, 0, 1)',
+    'rgba(46, 49, 146, 1)',
+    'rgba(255, 148, 0, 1)',
+    'rgba(1, 168, 158, 1)',
+    'rgba(238, 28, 37, 1)',
+    'rgba(141, 199, 1, 1)',
+    'rgba(102, 46, 145, 1)',
+    'rgba(255, 197, 1, 1)'
+];
+
 class HopCompoundChart extends Component {
     constructor(props) {
         super(props);
@@ -29,20 +44,22 @@ class HopCompoundChart extends Component {
 
     getDatasets = () => {
         let datasets = [];
-        for (let selected of this.props.data.selectedData) {
-            datasets.push(this.getSelected(selected));
+        for (let i = 0; i < this.props.data.selectedData.length; i++) {
+            const selected = this.props.data.selectedData[i];
+            const backgroundColor = SELECTED_COLORS[i % SELECTED_COLORS.length];
+            datasets.push(this.getSelected(selected, backgroundColor));
         }
         datasets.push(this.getCumulativeDist());
         return datasets;
     }
 
-    getSelected = (selected) => {
+    getSelected = (selected, borderColor) => {
         return {
             label: selected.label,
             data: selected.data,
             type: 'line',
             backgroundColor: 'rgba(200, 200, 200, 0)',
-            borderColor: 'rgba(100, 100, 250, 1)',
+            borderColor: borderColor,
             borderWidth: 5,
             pointRadius: 0,
             pointHoverRadius: 0,
