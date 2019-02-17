@@ -109,7 +109,7 @@ class HopCompoundDataset {
             }
         }
         return {
-            label: hop.variety_name,
+            label: hop.id,
             data: selectedArray,
         };
     }

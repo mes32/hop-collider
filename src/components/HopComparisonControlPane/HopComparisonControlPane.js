@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+
+import ControlPaneList from './ControlPaneList/ControlPaneList';
 
 class HopComparisonControlPane extends Component {
 
@@ -12,14 +13,14 @@ class HopComparisonControlPane extends Component {
             <div className="control-pane">
                 <select onChange={this.selectHop} defaultValue="">
                     <option value="">-- Select a Hop --</option>
-                    {this.props.reduxStore.hops.map(
+                    {this.props.hops.map(
                         (hop) => <option key={hop.id} value={hop.id}>{hop.variety_name} ({hop.country})</option>
                     )}
                 </select>
+                <ControlPaneList hops={this.props.hops} />
             </div>
         );
     }
 }
 
-const mapReduxStoreToProps = (reduxStore) => ({ reduxStore });
-export default connect(mapReduxStoreToProps)(HopComparisonControlPane);
+export default HopComparisonControlPane;

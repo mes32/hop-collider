@@ -8,6 +8,7 @@
     width: 35vw;
     background-color: rgba(193, 193, 193, 0.6);
     float: left;
+    overflow: hidden;
 }
 
 .scroll-pane-div {
