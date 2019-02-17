@@ -7,7 +7,6 @@ class ControlPaneList extends Component {
     render() {
         return (
             <div>
-                <h3>Select Hops</h3>
                 <div className="hop-list-div">
                     <table className="hop-list-table">
                         <tbody>

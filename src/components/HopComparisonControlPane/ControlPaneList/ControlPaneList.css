@@ -1,10 +1,13 @@
 .hop-list-div {
-    height: 60vh;
+    height: 75vh;
     overflow: scroll;
+    padding: 2px;
 }
 
 .hop-list-table {
     border: 1px solid black;
     float: none;
     margin: 0 auto;
+
+    font-size: 0.8rem;
 }
