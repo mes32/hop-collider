@@ -10,9 +10,10 @@ class HopComparisonPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, [this.props.reduxStore.focusHop]),
-            betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, [this.props.reduxStore.focusHop]),
-            cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, [this.props.reduxStore.focusHop])
+            selectedHops: [],
+            alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, []),
+            betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, []),
+            cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, [])
         };
     }
 
@@ -22,22 +23,34 @@ class HopComparisonPage extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.props.reduxStore.hops !== prevProps.reduxStore.hops || this.props.reduxStore.focusHop !== prevProps.reduxStore.focusHop) {
+        if (this.props.reduxStore.hops !== prevProps.reduxStore.hops) {
             this.setState({
-                alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, [this.props.reduxStore.focusHop]),
-                betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, [this.props.reduxStore.focusHop]),
-                cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, [this.props.reduxStore.focusHop])
+                selectedHops: [],
+                alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, []),
+                betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, []),
+                cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, [])
             });
         }
     }
 
-    selectHop = (event) => {
-        const id = event.target.value;
+    selectHop = (id) => {
         if (id === '') {
-            // clear plots
-        } else {
-            const action = { type: 'FETCH_FOCUS_HOP', payload: id };
-            this.props.dispatch(action);
+            this.setState({
+                selectedHops: [],
+                alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, []),
+                betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, []),
+                cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, [])
+            });
+        } else {            
+            const hop = this.props.reduxStore.hops.find(element => element.id === parseInt(id));
+            if (hop) {
+                this.setState({
+                    selectedHops: [hop],
+                    alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, [hop]),
+                    betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, [hop]),
+                    cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, [hop]),
+                });
+            }
         }
     }
 

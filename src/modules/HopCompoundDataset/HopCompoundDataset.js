@@ -88,7 +88,6 @@ class HopCompoundDataset {
     }
 
     getSelectedArray = (compound, selected) => {
-        console.log(selected);
         let datasetArray = [];
         for (let i = 0; i < selected.length; i++) {
             const y = (i + 1) / (selected.length + 1);
