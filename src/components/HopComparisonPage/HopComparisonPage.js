@@ -45,16 +45,10 @@ class HopComparisonPage extends Component {
         return (
             <div className="hop-comparison-div">
                 <div className="control-pane-div">
-                    <HopComparisonControlPane />
+                    <HopComparisonControlPane selectHop={this.selectHop} />
                 </div>
                 <div className="scroll-pane-div">
                     <h2>Hop Comparison</h2>
-                    <select onChange={this.selectHop} defaultValue="">
-                        <option value="">-- Select a Hop --</option>
-                        {this.props.reduxStore.hops.map(
-                            (hop) => <option key={hop.id} value={hop.id}>{hop.variety_name} ({hop.country})</option>
-                        )}
-                    </select>
                     <HopCompoundChart data={this.state.alphaAcidData} />
                     <HopCompoundChart data={this.state.betaAcidData} />
                     <HopCompoundChart data={this.state.cohumuloneData} />
