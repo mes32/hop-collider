@@ -33,32 +33,21 @@ class HopComparisonPage extends Component {
         }
     }
 
-    selectHop = (id) => {
-        if (id === '') {
-            this.setState({
-                selectedHops: [],
-                alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, []),
-                betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, []),
-                cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, [])
-            });
-        } else {            
-            const hop = this.props.reduxStore.hops.find(element => element.id === parseInt(id));
-            if (hop) {
-                this.setState({
-                    selectedHops: [...this.state.selectedHops, hop],
-                    alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, [...this.state.selectedHops, hop]),
-                    betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, [...this.state.selectedHops, hop]),
-                    cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, [...this.state.selectedHops, hop]),
-                });
-            }
-        }
+    addHop = (newHop) => {
+        const selectedHops = [...this.state.selectedHops, newHop];
+        this.setState({
+            selectedHops: selectedHops,
+            alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, selectedHops),
+            betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, selectedHops),
+            cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, selectedHops),
+        });
     }
 
     render() {
         return (
             <div className="hop-comparison-div">
                 <div className="control-pane-div">
-                    <HopComparisonControlPane hops={this.props.reduxStore.hops} selectHop={this.selectHop} />
+                    <HopComparisonControlPane hops={this.props.reduxStore.hops} addHop={this.addHop} />
                 </div>
                 <div className="scroll-pane-div">
                     <h2>Hop Comparison</h2>

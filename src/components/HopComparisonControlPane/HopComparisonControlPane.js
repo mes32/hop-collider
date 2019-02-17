@@ -11,13 +11,7 @@ class HopComparisonControlPane extends Component {
     render() {
         return (
             <div className="control-pane">
-                <select onChange={this.selectHop} defaultValue="">
-                    <option value="">-- Select a Hop --</option>
-                    {this.props.hops.map(
-                        (hop) => <option key={hop.id} value={hop.id}>{hop.variety_name} ({hop.country})</option>
-                    )}
-                </select>
-                <ControlPaneList hops={this.props.hops} />
+                <ControlPaneList hops={this.props.hops} addHop={this.props.addHop} />
             </div>
         );
     }
