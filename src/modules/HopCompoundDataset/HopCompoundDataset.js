@@ -88,10 +88,9 @@ class HopCompoundDataset {
     }
 
     getSelectedArray = (compound, selected) => {
-        console.log(selected);
         let datasetArray = [];
         for (let i = 0; i < selected.length; i++) {
-            const y = (i + 1) / (selected.length + 1);
+            const y = 1 - ((i + 1) / (selected.length + 1));
             datasetArray.push(this.getSelected(compound, selected[i], y));
         }
         return datasetArray;
@@ -110,7 +109,7 @@ class HopCompoundDataset {
             }
         }
         return {
-            label: hop.variety_name,
+            label: hop.id,
             data: selectedArray,
         };
     }
