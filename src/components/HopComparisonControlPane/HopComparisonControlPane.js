@@ -15,7 +15,7 @@ class HopComparisonControlPane extends Component {
             <div className="control-pane">
                 <ControlPaneSearch />
                 <ControlPaneFilter />
-                <ControlPaneList hops={this.props.hops} addHop={this.props.addHop} />
+                <ControlPaneList hops={this.props.hops} selectedHops={this.props.selectedHops} addHop={this.props.addHop} />
             </div>
         );
     }

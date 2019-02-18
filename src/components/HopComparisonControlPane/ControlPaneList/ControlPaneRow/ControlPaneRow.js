@@ -6,7 +6,10 @@ class ControlPaneRow extends Component {
         this.props.addHop(this.props.hop);
     }
 
-    getUniqueName = (hop, hopArray) => {
+    getUniqueName = () => {
+        const hop = this.props.hop;
+        const hopArray = this.props.hops;
+
         const countNames = (count, element) => {
             if (element.variety_name === hop.variety_name) {
                 return count + 1;
@@ -23,12 +26,19 @@ class ControlPaneRow extends Component {
         }
     }
 
+    getDisabled = () => {
+        if (this.props.selectedHops.includes(this.props.hop)) {
+            return true;
+        }
+        return false;
+    }
+
     render() {
         return (
             <tr>
-                <td>{this.getUniqueName(this.props.hop, this.props.hops)}</td>
+                <td>{this.getUniqueName()}</td>
                 <td>
-                    <button onClick={this.addHop}>
+                    <button onClick={this.addHop} disabled={this.getDisabled()}>
                     add >
                     </button>
                 </td>

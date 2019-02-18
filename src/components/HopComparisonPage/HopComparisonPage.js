@@ -58,7 +58,7 @@ class HopComparisonPage extends Component {
         return (
             <div className="hop-comparison-div">
                 <div className="control-pane-div">
-                    <HopComparisonControlPane hops={this.props.reduxStore.hops} addHop={this.addHop} />
+                    <HopComparisonControlPane hops={this.props.reduxStore.hops} selectedHops={this.state.selectedHops} addHop={this.addHop} />
                 </div>
                 <div className="scroll-pane-div">
                     <h2>Hop Comparison</h2>

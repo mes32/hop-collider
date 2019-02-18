@@ -11,7 +11,7 @@ class ControlPaneList extends Component {
                     <table className="hop-list-table">
                         <tbody>
                             {this.props.hops.map(
-                                hop => <ControlPaneRow key={hop.id} hop={hop} hops={this.props.hops} addHop={this.props.addHop} />
+                                hop => <ControlPaneRow key={hop.id} hop={hop} selectedHops={this.props.selectedHops} hops={this.props.hops} addHop={this.props.addHop} />
                             )}
                         </tbody>
                     </table>
