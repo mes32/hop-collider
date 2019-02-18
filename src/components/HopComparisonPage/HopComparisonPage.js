@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import './HopComparisonPage.css';
+import DeleteHopBar from './DeleteHopBar/DeleteHopBar';
 import HopComparisonControlPane from '../HopComparisonControlPane/HopComparisonControlPane';
 import HopCompoundDataset from '../../modules/HopCompoundDataset/HopCompoundDataset';
 import HopCompoundChart from '../HopCompoundChart/HopCompoundChart';
@@ -43,6 +44,16 @@ class HopComparisonPage extends Component {
         });
     }
 
+    removeHop = (hopToRemove) => {
+        const selectedHops = this.state.selectedHops.filter(hop => hop !== hopToRemove);
+        this.setState({
+            selectedHops: selectedHops,
+            alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, selectedHops),
+            betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, selectedHops),
+            cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, selectedHops),
+        });
+    }
+
     render() {
         return (
             <div className="hop-comparison-div">
@@ -55,6 +66,7 @@ class HopComparisonPage extends Component {
                     <HopCompoundChart data={this.state.betaAcidData} />
                     <HopCompoundChart data={this.state.cohumuloneData} />
                 </div>
+                <DeleteHopBar selectedHops={this.state.selectedHops} removeHop={this.removeHop} />
             </div>
         );
     }

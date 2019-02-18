@@ -6,12 +6,12 @@
 .control-pane-div {
     height: 80vh;
     width: 30vw;
-    background-color: rgba(193, 193, 193, 0.6);
+    background-color: rgba(216, 216, 216);
     float: left;
     overflow: hidden;
 }
 
 .scroll-pane-div {
-    height: 80vh;
+    height: 75vh;
     overflow: scroll;
 }
