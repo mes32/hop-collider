@@ -2,6 +2,9 @@ DROP TABLE IF EXISTS hops;
 DROP TABLE IF EXISTS country;
 DROP TABLE IF EXISTS brewing_role;
 DROP TABLE IF EXISTS person;
+DROP TABLE IF EXISTS hop_comparison;
+DROP TABLE IF EXISTS hop_in_comparison;
+DROP TABLE IF EXISTS note;
 
 CREATE TABLE "person" 
 (
@@ -48,6 +51,7 @@ CREATE TABLE hops
     UNIQUE(variety_name, country_id),
     aromas VARCHAR(250),
     brewing_role_id INT REFERENCES brewing_role(id),
+    comparison_popularity INT NOT NULL DEFAULT 0,
     alpha_acid_min DECIMAL(6,3) CHECK(alpha_acid_min >= 0.0 AND alpha_acid_min <= 100),
     alpha_acid_max DECIMAL(6,3) CHECK(alpha_acid_max >= 0.0 AND alpha_acid_max <= 100 AND alpha_acid_max > alpha_acid_min),
     beta_acid_min DECIMAL(6,3) CHECK(beta_acid_min >= 0 AND beta_acid_min <= 100),
@@ -75,3 +79,48 @@ CREATE TABLE hops
     other_oils_min DECIMAL(6,3) CHECK(other_oils_min >= 0 AND other_oils_min <= 100),
     other_oils_max DECIMAL(6,3) CHECK(other_oils_max >= 0 AND other_oils_max <= 100 AND other_oils_max > other_oils_min)
 );
+
+CREATE TABLE hop_comparison
+(
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES person(id),
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE hop_in_comparison
+(
+    id SERIAL PRIMARY KEY,
+    hop_id INT REFERENCES hops(id),
+    hop_comparison_id INT REFERENCES hop_comparison(id)
+);
+
+CREATE TABLE note
+(
+    id SERIAL PRIMARY KEY,
+    hop_comparison_id INT REFERENCES hop_comparison(id),
+    user_id INT REFERENCES person(id),
+    body_text TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE hop_compound
+(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    chemical_class VARCHAR(250) NOT NULL,
+    description TEXT NOT NULL
+);
+INSERT INTO hop_compound
+    (name, chemical_class, description)
+VALUES
+    ('Alpha Acid', 'Hop Bitterness Acid', 'The primary chemical compound responsible for hop bitterness.'),
+    ('Beta Acid', 'Hop Bitterness Acid', 'The secondary chemical compound responsible for hop bitterness.'),
+    ('Cohumulone', 'Hop Bitterness Acid', 'An aromatic essential oil found in a number of plants including: mango, lemon grass, wild thyme, bay leaves, parsley, cannabis, ylang-ylang, cardamom, and hops. Myrcene contributes citrus, flowery, or piney aroma to beer. Other sources suggest it contributes a peppery and balsam aroma.'),
+    ('β-pinene', 'Terpene Essential Oil', 'An aromatic essential oil producing a pine-like smell.'),
+    ('Caryophyllene', 'Terpene Essential Oil', 'An aromatic essential oil found in cloves, rosemary, and hops.'),
+    ('Farnesene', 'Terpene Essential Oil', 'An aromatic essential oil. It is released by aphids as an alarm pheremone to warn other nearby aphids of threats. It is also synthesized by several plant species as a natural insect repellent.'),
+    ('Geraniol', 'Terpene Essential Oil', 'An aromatic essential oil with a rose-like scent. It is found in rose oil, palmarosa oil, and citronella oil.'),
+    ('Humulene', 'Terpene Essential Oil', 'An aromatic essential oil found in hops and other plants. It is responsible for the typical hoppy aroma of noble hops.'),
+    ('Linalool', 'Terpene Essential Oil', 'An aromatic essential oil found in flowers and spices. It''s aroma is floral with some spiciness.'),
+    ('Myrcene', 'Terpene Essential Oil', 'An aromatic essential oil found in a number of plants including: mango, lemon grass, wild thyme, bay leaves, parsley, cannabis, ylang-ylang, cardamom, and hops. Myrcene contributes citrus, flowery, or piney aroma to beer. Other sources suggest it contributes a peppery and balsam aroma.'),
+    ('Selinene', 'Terpene Essential Oil', 'An aromatic essential oil found in celery seeds.');
