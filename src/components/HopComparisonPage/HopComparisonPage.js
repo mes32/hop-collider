@@ -54,6 +54,22 @@ class HopComparisonPage extends Component {
         });
     }
 
+    saveComparison = (event) => {
+        if (this.state.selectedHops.length > 0) {
+            const action = {
+                type: 'SAVE_HOP_COMPARISON',
+                payload: {
+                    selectedHops: this.state.selectedHops
+                }
+            };
+            this.props.dispatch(action);
+        }
+    } 
+
+    addNote = (event) => {
+        console.log('addNote()');
+    }
+
     render() {
         return (
             <div className="hop-comparison-div">
@@ -61,6 +77,12 @@ class HopComparisonPage extends Component {
                     <HopComparisonControlPane hops={this.props.reduxStore.hops} selectedHops={this.state.selectedHops} addHop={this.addHop} />
                 </div>
                 <div className="scroll-pane-div">
+                    <button onClick={this.saveComparison}>
+                        Save Comparison
+                    </button>
+                    <button onClick={this.addNote}>
+                        Add Note
+                    </button>
                     <h2>Hop Comparison</h2>
                     <HopCompoundChart data={this.state.alphaAcidData} />
                     <HopCompoundChart data={this.state.betaAcidData} />
