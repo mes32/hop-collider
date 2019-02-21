@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class HopComparisonRow extends Component {
 
@@ -19,8 +20,12 @@ class HopComparisonRow extends Component {
         console.log('load hop comparison');
     }
 
-    delete = () => {
-        console.log('delete hop comparison');
+    delete = (event) => {
+        const action = {
+            type: 'DELETE_HOP_COMPARISON',
+            payload: this.props.comparison
+        };
+        this.props.dispatch(action);
     }
 
     render() {
@@ -43,4 +48,5 @@ class HopComparisonRow extends Component {
     }
 }
 
-export default HopComparisonRow
+const mapReduxStoreToProps = (reduxStore) => ({ reduxStore });
+export default connect(mapReduxStoreToProps)(HopComparisonRow);

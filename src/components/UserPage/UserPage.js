@@ -15,9 +15,9 @@ class UserPage extends Component {
         return (
             <div>
                 <h1 id="welcome">
-                    Welcome, {this.props.user.username}!
+                    Welcome, {this.props.reduxStore.user.username}!
                 </h1>
-                <p>Your ID is: {this.props.user.id}</p>
+                <p>Your ID is: {this.props.reduxStore.user.id}</p>
                 <LogOutButton className="log-in" />
                 <h2>Saved Hop Comparisons</h2>
                 <table>
@@ -45,7 +45,7 @@ class UserPage extends Component {
 // const mapStateToProps = ({user}) => ({ user });
 const mapReduxStoreToProps = reduxStore => ({
   reduxStore: reduxStore,
-  user: reduxStore.user,
+//   user: reduxStore.user,
 });
 
 // this allows us to use <App /> in index.js

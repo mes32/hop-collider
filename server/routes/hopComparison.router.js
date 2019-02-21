@@ -10,7 +10,7 @@ router.post('/', (req, res) => {
         (async () => {
             const client = await pool.connect();
             try {
-                await client.query('BEGIN')
+                await client.query('BEGIN');
                 const insertComparisonText = `
                 INSERT INTO hop_comparison
                     (user_id)
@@ -34,6 +34,7 @@ router.post('/', (req, res) => {
                 throw e;
             } finally {
                 client.release();
+                res.sendStatus(201);
             }
         })().catch(e => console.error(e.stack));
     }
@@ -83,6 +84,37 @@ router.get('/:id', (req, res) => {
             console.log(`Error on route GET /api/hop_comparison/:id. ${error}`);
             res.sendStatus(500);
         });
+    }
+});
+
+// Route DELETE /api/hop_comparison/:id
+router.delete('/:id', (req, res) => {
+    if (req.isAuthenticated) {
+        const user_id = req.user.id;
+        const comparison_id = req.params.id;
+        (async () => {
+            const client = await pool.connect();
+            try {
+                await client.query('BEGIN');
+                const deleteHopsText = `
+                DELETE FROM hop_in_comparison
+                WHERE hop_comparison_id = $1;
+                `;
+                await client.query(deleteHopsText, [comparison_id]);
+                const deleteComparisonText = `
+                DELETE FROM hop_comparison
+                WHERE user_id = $1 AND id = $2;
+                `;
+                await client.query(deleteComparisonText, [user_id, comparison_id]);
+                await client.query('COMMIT');
+            } catch (e) {
+                await client.query('ROLLBACK');
+                throw e;
+            } finally {
+                client.release();
+                res.sendStatus(200);
+            }
+        })().catch(e => console.error(e.stack));
     }
 });
 
