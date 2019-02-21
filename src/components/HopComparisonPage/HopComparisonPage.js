@@ -4,18 +4,9 @@ import { connect } from 'react-redux';
 import './HopComparisonPage.css';
 import DeleteHopBar from './DeleteHopBar/DeleteHopBar';
 import HopComparisonControlPane from '../HopComparisonControlPane/HopComparisonControlPane';
-import HopCompoundDataset from '../../modules/HopCompoundDataset/HopCompoundDataset';
 import HopCompoundChart from '../HopCompoundChart/HopCompoundChart';
 
 class HopComparisonPage extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, []),
-    //         // betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, []),
-    //         // cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, [])
-    //     };
-    // }
 
     componentDidMount() {
         const action = { type: 'FETCH_HOPS' };

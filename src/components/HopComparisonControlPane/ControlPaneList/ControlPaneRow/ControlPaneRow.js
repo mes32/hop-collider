@@ -32,8 +32,10 @@ class ControlPaneRow extends Component {
     }
 
     getDisabled = () => {
-        if (this.props.reduxStore.selectedHops.includes(this.props.hop)) {
-            return true;
+        for (let hop of this.props.reduxStore.selectedHops) {
+            if (hop.id === this.props.hop.id) {
+                return true;
+            }
         }
         return false;
     }
