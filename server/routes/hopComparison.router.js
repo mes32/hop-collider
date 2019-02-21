@@ -69,7 +69,7 @@ router.get('/:id', (req, res) => {
         const user_id = req.user.id;
         const comparison_id = req.params.id;
         const queryText = `
-        SELECT hop_comparison.*, hops.id AS hops_id, hops.variety_name FROM
+        SELECT hops.* FROM
         hop_comparison
         JOIN hop_in_comparison
         ON hop_comparison.id = hop_in_comparison.hop_comparison_id

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import './ControlPaneList.css';
 import ControlPaneRow from './ControlPaneRow/ControlPaneRow';
@@ -10,8 +11,8 @@ class ControlPaneList extends Component {
                 <div className="hop-list-div">
                     <table className="hop-list-table">
                         <tbody>
-                            {this.props.hops.map(
-                                hop => <ControlPaneRow key={hop.id} hop={hop} selectedHops={this.props.selectedHops} hops={this.props.hops} addHop={this.props.addHop} />
+                            {this.props.reduxStore.hops.map(
+                                hop => <ControlPaneRow key={hop.id} hop={hop} />
                             )}
                         </tbody>
                     </table>
@@ -21,4 +22,5 @@ class ControlPaneList extends Component {
     }
 }
 
-export default ControlPaneList;
+const mapReduxStoreToProps = (reduxStore) => ({ reduxStore });
+export default connect(mapReduxStoreToProps)(ControlPaneList);

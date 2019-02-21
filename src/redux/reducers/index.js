@@ -6,6 +6,7 @@ import hopComparisons from './hopComparisonsReducer';
 import hopUsage from './hopUsageReducer';
 import hops from './hopsReducer';
 import loginMode from './loginModeReducer';
+import selectedHops from './selectedHopsReducer';
 import user from './userReducer';
 
 // rootReducer is the primary reducer for our entire project
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   hopUsage,
   hops, // An array of all hops in the server-side database
   loginMode, // will have a value of 'login' or 'registration' to control which screen is shown
+  selectedHops,
   user, // will have an id and username if someone is logged in
 });
 

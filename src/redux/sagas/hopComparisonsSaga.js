@@ -2,7 +2,7 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
 // worker Saga: will be fired on 'SAVE_HOP_COMPARISON' actions
-function* saveHopComparisons(action) {
+function* saveHopComparison(action) {
     try {
         yield axios.post('api/hop_comparison', action.payload);
         yield put({ type: 'FETCH_HOP_COMPARISONS' });
@@ -14,16 +14,21 @@ function* saveHopComparisons(action) {
 }
 
 // worker Saga: will be fired on 'LOAD_HOP_COMPARISON' actions
-// function* loadHopComparisons() {
-//     try {
-//         const response = yield axios.get('api/hops');
-//         yield put({ type: 'SET_HOPS', payload: response.data });
-//     } catch (error) {
-//         const errorMessage = `Unable to load hop comparison from server. ${error}`;
-//         console.log(errorMessage);
-//         alert(errorMessage);
-//     }
-// }
+function* loadHopComparison(action) {
+    try {
+        const response = yield axios.get(`api/hop_comparison/${action.payload.id}`);
+        // const comparison = action.payload;
+
+
+
+
+        // yield put({ type: 'SET_HOPS', payload: response.data });
+    } catch (error) {
+        const errorMessage = `Unable to load hop comparison. ${error}`;
+        console.log(errorMessage);
+        alert(errorMessage);
+    }
+}
 
 function* deleteHopComparison(action) {
     try {
@@ -48,8 +53,8 @@ function* fetchHopComparisons() {
 }
 
 function* hopComparisonSaga() {
-    yield takeLatest('SAVE_HOP_COMPARISON', saveHopComparisons);
-    // yield takeLatest('LOAD_HOP_COMPARISON', loadHopComparisons);
+    yield takeLatest('SAVE_HOP_COMPARISON', saveHopComparison);
+    yield takeLatest('LOAD_HOP_COMPARISON', loadHopComparison);
     yield takeLatest('DELETE_HOP_COMPARISON', deleteHopComparison);
     yield takeLatest('FETCH_HOP_COMPARISONS', fetchHopComparisons);
 }

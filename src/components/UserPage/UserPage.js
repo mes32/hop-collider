@@ -31,7 +31,7 @@ class UserPage extends Component {
                     </thead>
                     <tbody>
                         {this.props.reduxStore.hopComparisons.map(comparison => 
-                            <HopComparisonRow key={comparison.id} comparison={comparison} />
+                            <HopComparisonRow key={comparison.id} comparison={comparison} history={this.props.history} />
                         )}
                     </tbody>
                 </table>

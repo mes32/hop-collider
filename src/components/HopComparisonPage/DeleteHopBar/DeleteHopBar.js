@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import './DeleteHopBar.css';
 
@@ -19,7 +20,11 @@ const SELECTED_COLORS = [
 
 class DeleteHopBar extends Component {
     removeHop = (hop) => {
-        this.props.removeHop(hop);
+        const action = {
+            type: 'REMOVE_SELECTED_HOP',
+            payload: hop
+        };
+        this.props.dispatch(action);
     }
 
     getButtonColor = (index) => {
@@ -31,7 +36,7 @@ class DeleteHopBar extends Component {
     render() {
         return (
             <div className="delete-hop-bar">
-                {this.props.selectedHops.map((hop, i) => 
+                {this.props.reduxStore.selectedHops.map((hop, i) => 
                     <button key={hop.id} onClick={this.removeHop.bind(this, hop)} style={this.getButtonColor(i)} >
                         {hop.variety_name} X
                     </button>
@@ -41,4 +46,5 @@ class DeleteHopBar extends Component {
     }
 }
 
-export default DeleteHopBar;
+const mapReduxStoreToProps = (reduxStore) => ({ reduxStore });
+export default connect(mapReduxStoreToProps)(DeleteHopBar);

@@ -17,10 +17,15 @@ class HopComparisonRow extends Component {
     }
 
     load = () => {
-        console.log('load hop comparison');
+        const action = {
+            type: 'LOAD_HOP_COMPARISON',
+            payload: this.props.comparison
+        };
+        this.props.dispatch(action);
+        this.props.history.push('/hop_comparison');
     }
 
-    delete = (event) => {
+    delete = () => {
         const action = {
             type: 'DELETE_HOP_COMPARISON',
             payload: this.props.comparison
