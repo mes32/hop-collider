@@ -8,36 +8,26 @@ import HopCompoundDataset from '../../modules/HopCompoundDataset/HopCompoundData
 import HopCompoundChart from '../HopCompoundChart/HopCompoundChart';
 
 class HopComparisonPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, []),
-            // betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, []),
-            // cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, [])
-        };
-    }
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, []),
+    //         // betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, []),
+    //         // cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, [])
+    //     };
+    // }
 
     componentDidMount() {
         const action = { type: 'FETCH_HOPS' };
         this.props.dispatch(action);
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (this.props.reduxStore.hops !== prevProps.reduxStore.hops) {
-            this.setState({
-                alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, []),
-                // betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, []),
-                // cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, [])
-            });
-        }
-    }
-
     saveComparison = (event) => {
-        if (this.state.selectedHops.length > 0) {
+        if (this.props.reduxStore.selectedHops.length > 0) {
             const action = {
                 type: 'SAVE_HOP_COMPARISON',
                 payload: {
-                    selectedHops: this.state.selectedHops
+                    selectedHops: this.props.reduxStore.selectedHops
                 }
             };
             this.props.dispatch(action);
@@ -62,7 +52,7 @@ class HopComparisonPage extends Component {
                         Add Note
                     </button>
                     <h2>Hop Comparison</h2>
-                    <HopCompoundChart data={this.state.alphaAcidData} />
+                    <HopCompoundChart data={this.props.reduxStore.datasets.alphaAcidData} />
                     {/* <HopCompoundChart data={this.state.betaAcidData} /> */}
                     {/* <HopCompoundChart data={this.state.cohumuloneData} /> */}
                 </div>

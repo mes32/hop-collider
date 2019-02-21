@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import countries from './countriesReducer';
+import datasets from './datasetsReducer';
 import focusHop from './focusHopReducer';
 import errors from './errorsReducer';
 import hopComparisons from './hopComparisonsReducer';
@@ -17,6 +18,7 @@ import user from './userReducer';
 // This is what we get when we use 'state' inside of 'mapStateToProps'
 const rootReducer = combineReducers({
   countries,
+  datasets,
   focusHop,
   errors, // contains registrationMessage and loginMessage
   hopComparisons,

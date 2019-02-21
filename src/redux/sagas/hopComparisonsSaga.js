@@ -17,12 +17,14 @@ function* saveHopComparison(action) {
 function* loadHopComparison(action) {
     try {
         const response = yield axios.get(`api/hop_comparison/${action.payload.id}`);
-        // const comparison = action.payload;
-
-
-
-
-        // yield put({ type: 'SET_HOPS', payload: response.data });
+        yield put({ type: 'RESET_SELECTED_HOPS' });
+        for (let hop of response.data) {
+            const action = {
+                type: 'ADD_SELECTED_HOP',
+                payload: hop
+            }
+            yield put(action);
+        }
     } catch (error) {
         const errorMessage = `Unable to load hop comparison. ${error}`;
         console.log(errorMessage);

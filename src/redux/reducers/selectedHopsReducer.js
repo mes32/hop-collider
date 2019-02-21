@@ -3,7 +3,8 @@ const defaultState = [];
 const selectedHops = (state = defaultState, action) => {
     switch (action.type) {
         case 'ADD_SELECTED_HOP':
-            return [...state, action.payload];
+            const hopToAdd = action.payload;
+            return [...state, hopToAdd];
         case 'REMOVE_SELECTED_HOP':
             const hopToRemove = action.payload;
             return state.filter(hop => hop !== hopToRemove);
