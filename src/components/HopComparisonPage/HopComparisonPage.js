@@ -43,9 +43,9 @@ class HopComparisonPage extends Component {
                         Add Note
                     </button>
                     <h2>Hop Comparison</h2>
-                    <HopCompoundChart data={this.props.reduxStore.datasets.alphaAcidData} />
-                    {/* <HopCompoundChart data={this.state.betaAcidData} /> */}
-                    {/* <HopCompoundChart data={this.state.cohumuloneData} /> */}
+                    <HopCompoundChart data={this.props.reduxStore.datasets.alphaAcid} />
+                    <HopCompoundChart data={this.props.reduxStore.datasets.betaAcid} />
+                    <HopCompoundChart data={this.props.reduxStore.datasets.cohumulone} />
                 </div>
                 <DeleteHopBar />
             </div>

@@ -23,6 +23,7 @@ class AdminPageRow extends Component {
                 <td>{hop.id}</td>
                 <td>{hop.variety_name}</td>
                 <td>{hop.country}</td>
+                <td>{hop.comparison_popularity}</td>
                 <td>
                     <Link to={aboutURL}>
                         about

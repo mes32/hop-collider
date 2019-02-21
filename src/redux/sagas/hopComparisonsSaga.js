@@ -34,7 +34,11 @@ function* loadHopComparison(action) {
 
 function* deleteHopComparison(action) {
     try {
-        yield axios.delete(`api/hop_comparison/${action.payload.id}`);
+        const id = action.payload.id;
+        const hops = action.payload.hops;
+        console.log(`id: ${id}`);
+        console.log(`hops: ${hops}`);
+        yield axios.delete(`api/hop_comparison/${action.payload.id}`, { data: { hops: hops } });
         yield put({ type: 'FETCH_HOP_COMPARISONS' });
     } catch (error) {
         const errorMessage = `Unable to delete comparison from server. ${error}`;

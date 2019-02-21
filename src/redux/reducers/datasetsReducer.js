@@ -3,7 +3,9 @@ import HopCompoundDataset from '../../modules/HopCompoundDataset/HopCompoundData
 const defaultState = {
     hops: [],
     selectedHops: [],
-    alphaAcidData: new HopCompoundDataset('alpha_acid', [], []),
+    alphaAcid: new HopCompoundDataset('alpha_acid', [], []),
+    betaAcid: new HopCompoundDataset('beta_acid', [], []),
+    cohumulone: new HopCompoundDataset('cohumulone', [], []),
 };
 
 const datasets = (state = defaultState, action) => {
@@ -14,9 +16,9 @@ const datasets = (state = defaultState, action) => {
                 return {
                     hops: newHops,
                     selectedHops: state.selectedHops,
-                    alphaAcidData: new HopCompoundDataset('alpha_acid', newHops, state.selectedHops),
-                    // betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, []),
-                    // cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, [])
+                    alphaAcid: new HopCompoundDataset('alpha_acid', newHops, state.selectedHops),
+                    betaAcid: new HopCompoundDataset('beta_acid', newHops, state.selectedHops),
+                    cohumulone: new HopCompoundDataset('cohumulone', newHops, state.selectedHops),
                 };
             } else {
                 return state;
@@ -27,7 +29,9 @@ const datasets = (state = defaultState, action) => {
             return {
                 hops: state.hops,
                 selectedHops: appendedHops,
-                alphaAcidData: new HopCompoundDataset('alpha_acid', state.hops, appendedHops),
+                alphaAcid: new HopCompoundDataset('alpha_acid', state.hops, appendedHops),
+                betaAcid: new HopCompoundDataset('beta_acid', state.hops, appendedHops),
+                cohumulone: new HopCompoundDataset('cohumulone', state.hops, appendedHops),
             };
         case 'REMOVE_SELECTED_HOP':
             const hopToRemove = action.payload;
@@ -35,13 +39,17 @@ const datasets = (state = defaultState, action) => {
             return {
                 hops: state.hops,
                 selectedHops: filteredHops,
-                alphaAcidData: new HopCompoundDataset('alpha_acid', state.hops, filteredHops),
+                alphaAcid: new HopCompoundDataset('alpha_acid', state.hops, filteredHops),
+                betaAcid: new HopCompoundDataset('beta_acid', state.hops, filteredHops),
+                cohumulone: new HopCompoundDataset('cohumulone', state.hops, filteredHops),
             };
         case 'RESET_SELECTED_HOPS':
             return {
                 hops: state.hops,
                 selectedHops: [],
-                alphaAcidData: new HopCompoundDataset('alpha_acid', state.hops, []),
+                alphaAcid: new HopCompoundDataset('alpha_acid', state.hops, []),
+                betaAcid: new HopCompoundDataset('beta_acid', state.hops, []),
+                cohumulone: new HopCompoundDataset('cohumulone', state.hops, []),
             };
         default:
             return state;

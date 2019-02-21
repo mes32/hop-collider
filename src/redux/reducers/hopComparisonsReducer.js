@@ -9,7 +9,7 @@ const hopComparisons = (state = defaultState, action) => {
                 if (comparison.id === row.id) {
                     foundExisting = true;
                     const newHop = {
-                        hop_id: row.hops_id,
+                        id: row.hops_id,
                         variety_name: row.variety_name
                     };
                     comparison.hops.push(newHop);
@@ -18,7 +18,7 @@ const hopComparisons = (state = defaultState, action) => {
             }
             if (!foundExisting) {
                 const newHop = {
-                    hop_id: row.hops_id,
+                    id: row.hops_id,
                     variety_name: row.variety_name
                 };
                 const newEntry = {

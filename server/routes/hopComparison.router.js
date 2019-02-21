@@ -27,6 +27,12 @@ router.post('/', (req, res) => {
                         ($1, $2);
                     `;
                     await client.query(insertHopText, [hop_comparison_id, hop.id]);
+                    const incrementPopularity = `
+                    UPDATE hops
+                    SET comparison_popularity = comparison_popularity + 1
+                    WHERE id = $1;
+                    `;
+                    await client.query(incrementPopularity, [hop.id]);
                 }
                 await client.query('COMMIT');
             } catch (e) {
@@ -88,14 +94,23 @@ router.get('/:id', (req, res) => {
 });
 
 // Route DELETE /api/hop_comparison/:id
-router.delete('/:id', (req, res) => {
+router.delete('/:id', (req, res, config) => {
     if (req.isAuthenticated) {
         const user_id = req.user.id;
         const comparison_id = req.params.id;
+        const selectedHops = req.body.hops;
         (async () => {
             const client = await pool.connect();
             try {
                 await client.query('BEGIN');
+                for (let hop of selectedHops) {
+                    const decrementPopularity = `
+                    UPDATE hops
+                    SET comparison_popularity = comparison_popularity - 1
+                    WHERE id = $1;
+                    `;
+                    await client.query(decrementPopularity, [hop.id]);
+                }
                 const deleteHopsText = `
                 DELETE FROM hop_in_comparison
                 WHERE hop_comparison_id = $1;
