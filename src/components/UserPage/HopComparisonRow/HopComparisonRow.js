@@ -1,0 +1,46 @@
+import React, { Component } from 'react';
+
+class HopComparisonRow extends Component {
+
+    listHops = () => {
+        const hops = this.props.comparison.hops;
+        if (hops.length === 0) {
+            return '';
+        } else {
+            let hopString = hops[0].variety_name;
+            for (let i = 1; i < hops.length; i++) {
+                hopString += `, ${hops[i].variety_name}`
+            }
+            return hopString;
+        }
+    }
+
+    load = () => {
+        console.log('load hop comparison');
+    }
+
+    delete = () => {
+        console.log('delete hop comparison');
+    }
+
+    render() {
+        return (
+            <tr>
+                <td>{this.props.comparison.created_at}</td>
+                <td>{this.listHops()}</td>
+                <td>
+                    <button onClick={this.load}>
+                        Load
+                    </button>
+                </td>
+                <td>
+                    <button onClick={this.delete}>
+                        Delete
+                    </button>        
+                </td>
+            </tr>
+        );
+    }
+}
+
+export default HopComparisonRow
