@@ -23,6 +23,28 @@ router.get('/', (req, res) => {
     });
 });
 
+
+// Route GET /api/hops/popularity
+router.get('/popularity', (req, res) => {
+    const queryText = `
+    SELECT
+        hops.*,
+        country.country_name AS country,
+        brewing_role.description AS brewing_role
+    FROM hops
+    LEFT JOIN country ON hops.country_id = country.id
+    LEFT JOIN brewing_role ON hops.brewing_role_id = brewing_role.id
+    ORDER BY hops.comparison_popularity DESC, hops.variety_name ASC, country ASC;
+    `;
+    pool.query(queryText).then((queryResponse) => {
+        res.send(queryResponse.rows);
+    }).catch((queryError) => {
+        const errorMessage = `SQL error using GET /api/hops, ${queryError}`;
+        console.log(errorMessage);
+        res.sendStatus(500);
+    });
+});
+
 // Route GET /api/hops/:id
 router.get('/:id', (req, res) => {
     const id = req.params.id;

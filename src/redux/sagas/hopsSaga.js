@@ -13,6 +13,18 @@ function* fetchHops() {
     }
 }
 
+// worker Saga: will be fired on 'FETCH_HOPS_POPULARITY' actions
+function* fetchHopsPopularity() {
+    try {
+        const response = yield axios.get('api/hops/popularity');
+        yield put({ type: 'SET_HOPS', payload: response.data });
+    } catch (error) {
+        const errorMessage = `Unable to fetch hops () from server. ${error}`;
+        console.log(errorMessage);
+        alert(errorMessage);
+    }
+}
+
 // worker Saga: will be fired on 'ADD_HOP' actions
 function* addHop(action) {
     try {
@@ -51,6 +63,7 @@ function* deleteHop(action) {
 
 function* hopsSaga() {
     yield takeLatest('FETCH_HOPS', fetchHops);
+    yield takeLatest('FETCH_HOPS_POPULARITY', fetchHopsPopularity);
     yield takeLatest('ADD_HOP', addHop);
     yield takeLatest('UPDATE_HOP', updateHop);
     yield takeLatest('DELETE_HOP', deleteHop);
