@@ -50,6 +50,11 @@ class HopComparisonPage extends Component {
                     <HopCompoundChart data={this.props.reduxStore.datasets.alphaAcid} />
                     <HopCompoundChart data={this.props.reduxStore.datasets.betaAcid} />
                     <HopCompoundChart data={this.props.reduxStore.datasets.cohumulone} />
+                    <HopCompoundChart data={this.props.reduxStore.datasets.total_oil} />
+                    <HopCompoundChart data={this.props.reduxStore.datasets.myrcene} />
+                    <HopCompoundChart data={this.props.reduxStore.datasets.humulene} />
+                    <HopCompoundChart data={this.props.reduxStore.datasets.caryophyllene} />
+                    <HopCompoundChart data={this.props.reduxStore.datasets.farnesene} />
                 </div>
                 <DeleteHopBar />
             </div>

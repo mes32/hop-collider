@@ -7,7 +7,7 @@ import ControlPaneSearch from './ControlPaneSearch/ControlPaneSearch';
 // This is the control pane shown on the right side of the HopComparisonPage
 const HopComparisonControlPane = () =>(
     <div className="control-pane">
-        <ControlPaneSearch />
+        {/* <ControlPaneSearch /> */}
         <ControlPaneFilter />
         <ControlPaneList />
     </div>
