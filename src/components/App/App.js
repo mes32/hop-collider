@@ -12,20 +12,22 @@ import Footer from '../Footer/Footer';
 import HopComparisonPage from '../HopComparisonPage/HopComparisonPage';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
+import './App.css';
 import AddHopPage from '../AddHopPage/AddHopPage';
 import AdminPage from '../AdminPage/AdminPage';
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import HopListPage from '../HopListPage/HopListPage';
-
-import './App.css';
 import HopVarietyPage from '../HopVarietyPage/HopVarietyPage';
 
 class App extends Component {
+
+  // When this component mounts dispatch a request to the server for the users
   componentDidMount () {
     this.props.dispatch({ type: 'FETCH_USER' });
   }
 
+  // Show this component on the DOM
   render() {
     return (
       <Router>
@@ -73,7 +75,8 @@ class App extends Component {
           <Footer />
         </div>
       </Router>
-  )}
+    );
+  }
 }
 
 export default connect()(App);

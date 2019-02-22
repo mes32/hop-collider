@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import './ControlPaneFilter.css';
 
+// A section of the HopComparisonControlPane that allows the users to filter the
+// the available list of hops using various criteria.
 class ControlPaneFilter extends Component {
     constructor(props) {
         super(props);
@@ -11,6 +13,9 @@ class ControlPaneFilter extends Component {
         };
     }
 
+    // As the radio buttons change state, updates the component state to match.
+    // Also dispatches requests to get a list of hops from the server in either 
+    // alphabetical order or ranked by popularity.
     changeOrder = (event) => {
         console.log(`event.target.name: ${event.target.name}`)
         if (event.target.value === 'Alphabetical') {
@@ -28,6 +33,7 @@ class ControlPaneFilter extends Component {
         }
     }
 
+    // Show this component on the DOM
     render() {
         return (
             <div className="control-pane-filter">

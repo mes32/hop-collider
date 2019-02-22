@@ -3,6 +3,10 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 // Route POST /api/hop_comparison
+// Inserts a new hop comparison (i.e. data analysis) into the database. This 
+// requires making entries into the tables "hop_comparison" and 
+// "hop_in_comparison". As a minor effect also increases the popularity rating 
+// of any saved hops.
 router.post('/', (req, res) => {
     if (req.isAuthenticated) {
         const user_id = req.user.id;
@@ -49,6 +53,7 @@ router.post('/', (req, res) => {
 });
 
 // Route GET /api/hop_comparison
+// Returns all saved hop comparisons for the current user
 router.get('/', (req, res) => {
     if (req.isAuthenticated) {
         const user_id = req.user.id;
@@ -72,6 +77,7 @@ router.get('/', (req, res) => {
 });
 
 // Route GET /api/hop_comparison/:id
+// Returns a specific hop comparison based on its ID
 router.get('/:id', (req, res) => {
     if (req.isAuthenticated) {
         const user_id = req.user.id;
@@ -96,6 +102,9 @@ router.get('/:id', (req, res) => {
 });
 
 // Route DELETE /api/hop_comparison/:id
+// Deletes a specific hop anslisis based on its ID. Also deletes entries that 
+// would be orphaned in the table "hop_in_comparison". As a minor effect also 
+// reduces the popularity rating of any removed hops. 
 router.delete('/:id', (req, res, config) => {
     if (req.isAuthenticated) {
         const user_id = req.user.id;

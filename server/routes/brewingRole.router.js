@@ -3,6 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 // Route GET /api/brewing_role
+// Returns a list of possible roles for hops in the brewing process
 router.get('/', (req, res) => {
     const queryText = `
     SELECT 

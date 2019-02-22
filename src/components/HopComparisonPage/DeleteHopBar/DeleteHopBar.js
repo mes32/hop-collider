@@ -18,7 +18,13 @@ const SELECTED_COLORS = [
     'rgba(255, 197, 1)'
 ];
 
+// This is a div found at the bottom of the hop analysis charts that lists a 
+// button for each hop in the analysis. Pressing a button will remove a hop from
+// the analysis.
 class DeleteHopBar extends Component {
+
+    // When a button is pressed send a request to the database to remove the 
+    // current hop.
     removeHop = (hop) => {
         const action = {
             type: 'REMOVE_SELECTED_HOP',
@@ -27,12 +33,14 @@ class DeleteHopBar extends Component {
         this.props.dispatch(action);
     }
 
+    // Find the corresponding button color in the array
     getButtonColor = (index) => {
         return {
             color: SELECTED_COLORS[index % SELECTED_COLORS.length],
         };
     }
 
+    // Show this component on the DOM
     render() {
         return (
             <div className="delete-hop-bar">

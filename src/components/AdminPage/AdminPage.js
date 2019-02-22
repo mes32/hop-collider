@@ -5,15 +5,18 @@ import AdminPageRow from './AdminPageRow/AdminPageRow';
 
 class AdminPage extends Component {
 
+    // When this component mounts request data for all hops from the server
     componentDidMount() {
         const action = { type: 'FETCH_HOPS' };
         this.props.dispatch(action);
     }
 
+    // Send the browser to the AddHopPage
     addHop = (event) => {
         this.props.history.push('/add_hop');
     }
 
+    // Show this component on the DOM
     render() {
         return (
             <div>

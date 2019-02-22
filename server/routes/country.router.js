@@ -3,6 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 // Route GET /api/country
+// Returns all hop producing countries in the database
 router.get('/', (req, res) => {
     const queryText = `
     SELECT 

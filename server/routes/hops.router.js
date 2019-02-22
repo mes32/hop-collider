@@ -3,6 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 // Route GET /api/hops
+// Returns all hops in the database. (Ordered alphabetically)
 router.get('/', (req, res) => {
     const queryText = `
     SELECT
@@ -25,6 +26,8 @@ router.get('/', (req, res) => {
 
 
 // Route GET /api/hops/popularity
+// Returns all hops in the database ordered by popularity. Popularity rating is 
+// quantified as the frequency with which hops are included in saved analyses. 
 router.get('/popularity', (req, res) => {
     const queryText = `
     SELECT
@@ -46,6 +49,7 @@ router.get('/popularity', (req, res) => {
 });
 
 // Route GET /api/hops/:id
+// Return a specific hop based on ID
 router.get('/:id', (req, res) => {
     const id = req.params.id;
     const queryText = `
@@ -68,6 +72,7 @@ router.get('/:id', (req, res) => {
 });
 
 // Route POST /api/hops/
+// Insert a new hop entry into the database
 router.post('/', (req, res) => {
     if (req.isAuthenticated && req.user.is_admin) {
         const hop = req.body;
@@ -123,6 +128,7 @@ router.post('/', (req, res) => {
 });
 
 // Route PUT /api/hops/
+// Update an existing hop entry in the database
 router.put('/', (req, res) => {
     if (req.isAuthenticated && req.user.is_admin) {
         const hop = req.body;
@@ -179,6 +185,7 @@ router.put('/', (req, res) => {
 });
 
 // Route DELETE /api/hops/:id
+// Delete a particular hop entry based on hop variety's ID
 router.delete('/:id', (req, res) => {
     if (req.isAuthenticated && req.user.is_admin) {
         (async () => {

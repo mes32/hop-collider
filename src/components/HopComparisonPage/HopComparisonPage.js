@@ -8,11 +8,13 @@ import HopCompoundChart from '../HopCompoundChart/HopCompoundChart';
 
 class HopComparisonPage extends Component {
 
+    // When this component mounts request list of all hops
     componentDidMount() {
         const action = { type: 'FETCH_HOPS' };
         this.props.dispatch(action);
     }
 
+    // Save the current hop comparison analysis to the users account
     saveComparison = (event) => {
         if (this.props.reduxStore.selectedHops.length > 0) {
             const action = {
@@ -25,10 +27,12 @@ class HopComparisonPage extends Component {
         }
     } 
 
-    addNote = (event) => {
-        console.log('addNote()');
-    }
+    // Add a note to the current hop comparison analysis
+    // addNote = (event) => {
+    //     console.log('addNote()');
+    // }
 
+    // Show this component on the DOM
     render() {
         return (
             <div className="hop-comparison-div">

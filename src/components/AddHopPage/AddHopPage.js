@@ -38,12 +38,17 @@ const DEFAULT_STATE = {
     other_oils_max: ''
 };
 
+// This page allows the user to submit a new hop to be saved in the database. It
+// can also be used to update an existing hop in the database. This dual 
+// behavior depends on conditional routing.
 class AddHopPage extends Component {
     constructor(props) {
         super(props);
         this.state = DEFAULT_STATE;
     }
 
+    // When this component mounts request data for a hop of interest from the 
+    // server.
     componentDidMount() {
         const id = this.props.match.params.id;
         if (id) {
@@ -52,6 +57,8 @@ class AddHopPage extends Component {
         }
     }
 
+    // If the user changes the URL to another hop ID. This is required to update
+    // the components' state to reflect that change.
     componentDidUpdate(prevProps, prevState) {
         const prevHop = prevProps.reduxStore.focusHop;
         const focusHop = this.props.reduxStore.focusHop;
@@ -60,6 +67,7 @@ class AddHopPage extends Component {
         }
     }
 
+    // Load the form contents with focused hop's values
     loadState = (focusHop) => {
         if (focusHop) {
             let newState = focusHop;
@@ -74,6 +82,8 @@ class AddHopPage extends Component {
         }
     }
 
+    // Conditionally render the heading text if the page is being used to add a
+    // new hop or update an existing hop.
     getHeading = () => {
         if (this.props.match.params.id) {
             return `Update Hop: ${this.props.reduxStore.focusHop.variety_name}`;
@@ -82,6 +92,7 @@ class AddHopPage extends Component {
         }
     }
 
+    // Conditionally render the text on the form's submit button
     getSubmitText = () => {
         if (this.props.match.params.id) {
             return 'Update Hop';
@@ -90,6 +101,7 @@ class AddHopPage extends Component {
         }
     }
 
+    // Update the component's state to match changes to the corresponding input fields
     changeInput = (event) => {
         this.setState({
             ...this.state,
@@ -97,6 +109,8 @@ class AddHopPage extends Component {
         });
     }
 
+    // When the 'Submit/Update' button is pressed dispatch the current state to 
+    // the server.
     submit = (event) => {
         event.preventDefault();
         let hopToSend = this.state;
@@ -121,6 +135,7 @@ class AddHopPage extends Component {
         this.setState(DEFAULT_STATE);
     }
 
+    // Allow passing functionality for updating country_id to a child component 
     setCountry = (newID) => {
         this.setState({
             ...this.state,
@@ -128,6 +143,8 @@ class AddHopPage extends Component {
         });
     }
 
+    // Allow passing functionality for updating brewing_role_id to a child 
+    // component
     setBrewingRole = (newID) => {
         this.setState({
             ...this.state,
@@ -135,6 +152,7 @@ class AddHopPage extends Component {
         });
     }
 
+    // Show this component on the DOM
     render() {
         return (
             <div>

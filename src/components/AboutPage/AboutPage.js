@@ -1,18 +1,15 @@
 import React from 'react';
 
-// This is one of our simplest components
-// It doesn't have local state, so it can be a function component.
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is, so it doesn't need 'connect()'
-
+// This page provides a short summary of the applications purpose
 const AboutPage = () => (
-  <div>
     <div>
-      <p>
-        This about page is for anyone to read!
-      </p>
+        <div>
+            <h2>Application Overview</h2>
+            <p>
+                There are over one hundred and fifty different varieties of hops used for brewing beer. Each variety has its own unique flavor and character due to its chemical composition. Hop varieties have different concentrations of chemical compounds that produce bitterness as well as different aromatic essential oils. This app allows brewers to visualize and compare the profiles of different hop varieties to help them pick the perfect hops for their next beer recipe. 
+            </p>
+        </div>
     </div>
-  </div>
 );
 
 export default AboutPage;
