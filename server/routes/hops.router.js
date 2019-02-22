@@ -23,6 +23,28 @@ router.get('/', (req, res) => {
     });
 });
 
+
+// Route GET /api/hops/popularity
+router.get('/popularity', (req, res) => {
+    const queryText = `
+    SELECT
+        hops.*,
+        country.country_name AS country,
+        brewing_role.description AS brewing_role
+    FROM hops
+    LEFT JOIN country ON hops.country_id = country.id
+    LEFT JOIN brewing_role ON hops.brewing_role_id = brewing_role.id
+    ORDER BY hops.comparison_popularity DESC, hops.variety_name ASC, country ASC;
+    `;
+    pool.query(queryText).then((queryResponse) => {
+        res.send(queryResponse.rows);
+    }).catch((queryError) => {
+        const errorMessage = `SQL error using GET /api/hops, ${queryError}`;
+        console.log(errorMessage);
+        res.sendStatus(500);
+    });
+});
+
 // Route GET /api/hops/:id
 router.get('/:id', (req, res) => {
     const id = req.params.id;
@@ -159,15 +181,32 @@ router.put('/', (req, res) => {
 // Route DELETE /api/hops/:id
 router.delete('/:id', (req, res) => {
     if (req.isAuthenticated && req.user.is_admin) {
-        const id = req.params.id;
-        const queryText = `
-        DELETE FROM hops
-        WHERE id = $1;
-        `;
-        pool.query(queryText, [id]).then((queryResponse) => {
-            res.sendStatus(200);
-        }).catch((queryError) => {
-            const errorMessage = `SQL error using DELETE /api/hops/:id, ${queryError}`;
+        (async () => {
+            const client = await pool.connect();
+            try {
+                const id = req.params.id;
+                await client.query('BEGIN');
+                const deleteComparisonText = `
+                DELETE FROM hop_in_comparison
+                WHERE hop_id = $1;
+                `;
+                await client.query(deleteComparisonText, [id]);
+                const deleteHopText = `
+                DELETE FROM hops
+                WHERE id = $1;
+                `;
+                await client.query(deleteHopText, [id]);
+                await client.query('COMMIT');
+            } catch (error) {
+                await client.query('ROLLBACK');
+                throw error;
+            } finally {
+                client.release();
+                res.sendStatus(200);
+            }
+        })().catch((error) => {
+            console.error(error.stack);
+            const errorMessage = 'SQL error using DELETE /api/hops/:id';
             console.log(errorMessage);
             res.sendStatus(500);
         });

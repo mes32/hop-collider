@@ -11,6 +11,7 @@ const passport = require('./strategies/user.strategy');
 // Route includes
 const brewingRoleRouter = require('./routes/brewingRole.router');
 const countryRouter = require('./routes/country.router');
+const hopComparison = require('./routes/hopComparison.router');
 const hopsRouter = require('./routes/hops.router');
 const userRouter = require('./routes/user.router');
 
@@ -28,6 +29,7 @@ app.use(passport.session());
 /* Routes */
 app.use('/api/brewing_role', brewingRoleRouter);
 app.use('/api/country', countryRouter);
+app.use('/api/hop_comparison', hopComparison);
 app.use('/api/hops', hopsRouter);
 app.use('/api/user', userRouter);
 

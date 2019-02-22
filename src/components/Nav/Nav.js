@@ -10,6 +10,11 @@ const Nav = (props) => (
       <h2 className="nav-title">hop-collider</h2>
     </Link>
     <div className="nav-right">
+      {props.user.id && props.user.is_admin && (
+        <Link className="nav-link" to="/admin">
+          Admin Page
+        </Link>
+      )}
       <Link className="nav-link" to="/home">
         {/* Show this link if they are logged in or not,
         but call this link 'Home' if they are logged in,
@@ -25,9 +30,7 @@ const Nav = (props) => (
 
       {/* Show the link to the info page and the logout button if the user is logged in */}
       {props.user.id && (
-        <>
-          <LogOutButton className="nav-link"/>
-        </>
+          <LogOutButton className="nav-link" />
       )}
       {/* Always show this link since the about page is not protected */}
       <Link className="nav-link" to="/about">

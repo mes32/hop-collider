@@ -4,69 +4,50 @@ import { connect } from 'react-redux';
 import './HopComparisonPage.css';
 import DeleteHopBar from './DeleteHopBar/DeleteHopBar';
 import HopComparisonControlPane from '../HopComparisonControlPane/HopComparisonControlPane';
-import HopCompoundDataset from '../../modules/HopCompoundDataset/HopCompoundDataset';
 import HopCompoundChart from '../HopCompoundChart/HopCompoundChart';
 
 class HopComparisonPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            selectedHops: [],
-            alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, []),
-            betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, []),
-            cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, [])
-        };
-    }
 
     componentDidMount() {
         const action = { type: 'FETCH_HOPS' };
         this.props.dispatch(action);
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (this.props.reduxStore.hops !== prevProps.reduxStore.hops) {
-            this.setState({
-                selectedHops: [],
-                alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, []),
-                betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, []),
-                cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, [])
-            });
+    saveComparison = (event) => {
+        if (this.props.reduxStore.selectedHops.length > 0) {
+            const action = {
+                type: 'SAVE_HOP_COMPARISON',
+                payload: {
+                    selectedHops: this.props.reduxStore.selectedHops
+                }
+            };
+            this.props.dispatch(action);
         }
-    }
+    } 
 
-    addHop = (newHop) => {
-        const selectedHops = [...this.state.selectedHops, newHop];
-        this.setState({
-            selectedHops: selectedHops,
-            alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, selectedHops),
-            betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, selectedHops),
-            cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, selectedHops),
-        });
-    }
-
-    removeHop = (hopToRemove) => {
-        const selectedHops = this.state.selectedHops.filter(hop => hop !== hopToRemove);
-        this.setState({
-            selectedHops: selectedHops,
-            alphaAcidData: new HopCompoundDataset('alpha_acid', this.props.reduxStore.hops, selectedHops),
-            betaAcidData: new HopCompoundDataset('beta_acid', this.props.reduxStore.hops, selectedHops),
-            cohumuloneData: new HopCompoundDataset('cohumulone', this.props.reduxStore.hops, selectedHops),
-        });
+    addNote = (event) => {
+        console.log('addNote()');
     }
 
     render() {
         return (
             <div className="hop-comparison-div">
                 <div className="control-pane-div">
-                    <HopComparisonControlPane hops={this.props.reduxStore.hops} selectedHops={this.state.selectedHops} addHop={this.addHop} />
+                    <HopComparisonControlPane hops={this.props.reduxStore.hops} />
                 </div>
                 <div className="scroll-pane-div">
+                    <button onClick={this.saveComparison}>
+                        Save Comparison
+                    </button>
+                    {/* <button onClick={this.addNote}>
+                        Add Note
+                    </button> */}
                     <h2>Hop Comparison</h2>
-                    <HopCompoundChart data={this.state.alphaAcidData} />
-                    <HopCompoundChart data={this.state.betaAcidData} />
-                    <HopCompoundChart data={this.state.cohumuloneData} />
+                    <HopCompoundChart data={this.props.reduxStore.datasets.alphaAcid} />
+                    <HopCompoundChart data={this.props.reduxStore.datasets.betaAcid} />
+                    <HopCompoundChart data={this.props.reduxStore.datasets.cohumulone} />
                 </div>
-                <DeleteHopBar selectedHops={this.state.selectedHops} removeHop={this.removeHop} />
+                <DeleteHopBar />
             </div>
         );
     }

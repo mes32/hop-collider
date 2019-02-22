@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class ControlPaneRow extends Component {
 
     addHop = () => {
-        this.props.addHop(this.props.hop);
+        const action = {
+            type: 'ADD_SELECTED_HOP',
+            payload: this.props.hop
+        };
+        this.props.dispatch(action);
     }
 
     getUniqueName = () => {
         const hop = this.props.hop;
-        const hopArray = this.props.hops;
+        const hopArray = this.props.reduxStore.hops;
 
         const countNames = (count, element) => {
             if (element.variety_name === hop.variety_name) {
@@ -27,8 +32,10 @@ class ControlPaneRow extends Component {
     }
 
     getDisabled = () => {
-        if (this.props.selectedHops.includes(this.props.hop)) {
-            return true;
+        for (let hop of this.props.reduxStore.selectedHops) {
+            if (hop.id === this.props.hop.id) {
+                return true;
+            }
         }
         return false;
     }
@@ -47,4 +54,5 @@ class ControlPaneRow extends Component {
     }
 }
 
-export default ControlPaneRow;
+const mapReduxStoreToProps = (reduxStore) => ({ reduxStore });
+export default connect(mapReduxStoreToProps)(ControlPaneRow);

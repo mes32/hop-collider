@@ -2,3 +2,10 @@
     height: 12vh;
     background-color: #c8c8c8;
 }
+
+.control-pane-filter-radios {
+    max-height: 5vh;
+    width: 20vw;
+    padding: 0;
+    background-color: inherit;
+}
