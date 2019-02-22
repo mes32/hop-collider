@@ -39,9 +39,9 @@ class HopComparisonPage extends Component {
                     <button onClick={this.saveComparison}>
                         Save Comparison
                     </button>
-                    <button onClick={this.addNote}>
+                    {/* <button onClick={this.addNote}>
                         Add Note
-                    </button>
+                    </button> */}
                     <h2>Hop Comparison</h2>
                     <HopCompoundChart data={this.props.reduxStore.datasets.alphaAcid} />
                     <HopCompoundChart data={this.props.reduxStore.datasets.betaAcid} />

@@ -35,14 +35,16 @@ router.post('/', (req, res) => {
                     await client.query(incrementPopularity, [hop.id]);
                 }
                 await client.query('COMMIT');
-            } catch (e) {
+            } catch (error) {
                 await client.query('ROLLBACK');
-                throw e;
+                throw error;
             } finally {
                 client.release();
                 res.sendStatus(201);
             }
-        })().catch(e => console.error(e.stack));
+        })().catch((error) => {
+            console.error(error.stack);
+        });
     }
 });
 
@@ -122,14 +124,16 @@ router.delete('/:id', (req, res, config) => {
                 `;
                 await client.query(deleteComparisonText, [user_id, comparison_id]);
                 await client.query('COMMIT');
-            } catch (e) {
+            } catch (error) {
                 await client.query('ROLLBACK');
-                throw e;
+                throw error;
             } finally {
                 client.release();
                 res.sendStatus(200);
             }
-        })().catch(e => console.error(e.stack));
+        })().catch((error) => {
+            console.error(error.stack);
+        });
     }
 });
 
