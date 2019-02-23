@@ -15,3 +15,11 @@
     height: 75vh;
     overflow: scroll;
 }
+
+div.chart {
+    float: right;
+}
+
+h3 {
+    text-align: center;
+}

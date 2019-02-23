@@ -47,14 +47,14 @@ class HopComparisonPage extends Component {
                         Add Note
                     </button> */}
                     <h2>Hop Comparison</h2>
-                    <HopCompoundChart data={this.props.reduxStore.datasets.alphaAcid} />
-                    <HopCompoundChart data={this.props.reduxStore.datasets.betaAcid} />
-                    <HopCompoundChart data={this.props.reduxStore.datasets.cohumulone} />
-                    <HopCompoundChart data={this.props.reduxStore.datasets.total_oil} />
-                    <HopCompoundChart data={this.props.reduxStore.datasets.myrcene} />
-                    <HopCompoundChart data={this.props.reduxStore.datasets.humulene} />
-                    <HopCompoundChart data={this.props.reduxStore.datasets.caryophyllene} />
-                    <HopCompoundChart data={this.props.reduxStore.datasets.farnesene} />
+                    <HopCompoundChart title="Alpha Acid (% total)" data={this.props.reduxStore.datasets.alphaAcid} />
+                    <HopCompoundChart title="Beta Acid (% total)" data={this.props.reduxStore.datasets.betaAcid} />
+                    <HopCompoundChart title="Cohumulone (% of Alpha Acids)" data={this.props.reduxStore.datasets.cohumulone} />
+                    <HopCompoundChart title="Total Oil (milliliters / 100 grams)" data={this.props.reduxStore.datasets.total_oil} />
+                    <HopCompoundChart title="Myrcene (% oils)" data={this.props.reduxStore.datasets.myrcene} />
+                    <HopCompoundChart title="Humulene (% oils)" data={this.props.reduxStore.datasets.humulene} />
+                    <HopCompoundChart title="Caryophyllene (% oils)" data={this.props.reduxStore.datasets.caryophyllene} />
+                    <HopCompoundChart title="Farnesene (% oils)"data={this.props.reduxStore.datasets.farnesene} />
                 </div>
                 <DeleteHopBar />
             </div>

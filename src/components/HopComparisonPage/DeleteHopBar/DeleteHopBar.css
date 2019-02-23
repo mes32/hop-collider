@@ -1,4 +1,9 @@
 .delete-hop-bar {
     background-color: rgb(255, 0, 0, 0);
-    height: 5vh;
+    min-height: 5vh;
+}
+
+button:focus {
+  outline-color: transparent;
+  outline-style: none;
 }

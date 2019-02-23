@@ -36,7 +36,15 @@ class DeleteHopBar extends Component {
     // Find the corresponding button color in the array
     getButtonColor = (index) => {
         return {
-            color: SELECTED_COLORS[index % SELECTED_COLORS.length],
+            backgroundColor: SELECTED_COLORS[index % SELECTED_COLORS.length],
+            color: 'white',
+            fontWeight: 'bold',
+            fontSize: '0.5rem',
+            border: '1px solid white',
+            padding: '3px 6px',
+            borderRadius: '5px',
+            marginLeft: '2px',
+            marginTop: '8px',
         };
     }
 
@@ -46,7 +54,7 @@ class DeleteHopBar extends Component {
             <div className="delete-hop-bar">
                 {this.props.reduxStore.selectedHops.map((hop, i) => 
                     <button key={hop.id} onClick={this.removeHop.bind(this, hop)} style={this.getButtonColor(i)} >
-                        {hop.variety_name} X
+                        {hop.variety_name} ✗
                     </button>
                 )}
             </div>
