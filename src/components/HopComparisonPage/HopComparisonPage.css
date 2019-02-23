@@ -14,12 +14,10 @@
 .scroll-pane-div {
     height: 75vh;
     overflow: scroll;
+
+    padding-left: 30px;
 }
 
-div.chart {
-    float: right;
-}
-
-h3 {
+.scroll-pane-div h3 {
     text-align: center;
 }
