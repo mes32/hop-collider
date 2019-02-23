@@ -37,14 +37,6 @@ class DeleteHopBar extends Component {
     getButtonColor = (index) => {
         return {
             backgroundColor: SELECTED_COLORS[index % SELECTED_COLORS.length],
-            color: 'white',
-            fontWeight: 'bold',
-            fontSize: '0.5rem',
-            border: '1px solid white',
-            padding: '3px 6px',
-            borderRadius: '5px',
-            marginLeft: '2px',
-            marginTop: '8px',
         };
     }
 
