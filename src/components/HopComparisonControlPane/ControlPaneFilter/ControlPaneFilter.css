@@ -1,11 +1,25 @@
 .control-pane-filter {
     height: 12vh;
-    background-color: #c8c8c8;
+    background-color: #587b7f;
+    overflow: hidden;
 }
 
 .control-pane-filter-radios {
+    margin: 0.6rem 26px;
     max-height: 5vh;
     width: 20vw;
     padding: 0;
     background-color: inherit;
+    color: #142729;
+}
+
+.control-pane-filter h5 {
+    margin-top: 0;
+    margin-left: 30px;
+    margin-bottom: 0;
+    color: #2d494c;
+}
+
+.control-pane-filter {
+    padding-top: 0.4rem;
 }

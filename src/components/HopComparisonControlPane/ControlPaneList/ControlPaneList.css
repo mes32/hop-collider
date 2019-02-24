@@ -1,5 +1,6 @@
 .hop-list-div {
     height: 57vh;
+    height: 67vh; /* Note: Temporary until ControlPaneSearch is included  */
     overflow: scroll;
     padding: 4px;
 }
@@ -8,4 +9,5 @@
     float: none;
     margin: 0 auto;
     font-size: 0.8rem;
+    background-color: #d8d8d8;
 }
