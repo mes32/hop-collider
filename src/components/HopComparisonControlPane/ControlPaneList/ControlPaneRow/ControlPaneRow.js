@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ArrowIcon from '@material-ui/icons/ArrowRightAlt';
+
+import './ControlPaneRow.css';
 
 // One row in the list of hops on the ControlPaneList
 class ControlPaneRow extends Component {
@@ -51,10 +54,9 @@ class ControlPaneRow extends Component {
     render() {
         return (
             <tr>
-                <td>{this.getUniqueName()}</td>
-                <td>
-                    <button onClick={this.addHop} disabled={this.getDisabled()}>
-                    add >
+                <td className="control-pane-row">
+                    <button onClick={this.addHop} disabled={this.getDisabled()} className="control-pane-include-hop">
+                        {this.getUniqueName()}<ArrowIcon />
                     </button>
                 </td>
             </tr>

@@ -1,4 +1,36 @@
 .delete-hop-bar {
-    background-color: rgb(255, 0, 0, 0);
-    height: 5vh;
+    height: 7vh;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.delete-hop-bar button {
+    color: rgb(255, 255, 255, 0.9);
+    font-weight: bold;
+    font-size: 0.8rem;
+    border: 1px solid white;
+    padding: 0.1rem 8px;
+    border-radius: 5px;
+    margin-left: 2px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-hop-bar button:hover {
+  color: white;
+  cursor: pointer;
+}
+
+
+button:focus {
+  outline-color: transparent;
+  outline-style: none;
 }

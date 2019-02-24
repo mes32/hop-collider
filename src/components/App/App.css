@@ -1,6 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:600,700|Open+Sans:400,400i,700');
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     margin: 0px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+h1 {
+    font-weight: 700;
 }
 
 .alert {

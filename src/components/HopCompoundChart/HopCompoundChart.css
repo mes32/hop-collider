@@ -1,10 +1,42 @@
 .chart-container {
+    margin-top: 1rem;
+    margin-bottom: 1.4rem;
+    height: 20rem;
+
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding-top: 10px;
 }
 
 .chart {
-    width: 92%;
+    width: 34rem;
+}
+
+.y-labels h4 {
+    padding: 0;
+    margin: 0;
+}
+
+.y-labels {
+    padding: 0;
+    margin: 0;
+    padding: 0 5px 0 10px;
+
+    height: 17.6rem;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: flex-end;
+}
+
+.y-labels-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.y-labels-spacer {
+    height: 2.4rem;
 }

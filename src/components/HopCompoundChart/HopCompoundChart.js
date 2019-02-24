@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Line } from 'react-chartjs-2';
 
 import './HopCompoundChart.css';
@@ -8,7 +9,6 @@ const SELECTED_COLORS = [
     'rgba(243, 101, 35, 1)',
     'rgba(0, 166, 82, 1)',
     'rgba(146, 39, 143, 1)',
-    'rgba(254, 242, 0, 1)',
     'rgba(46, 49, 146, 1)',
     'rgba(255, 148, 0, 1)',
     'rgba(1, 168, 158, 1)',
@@ -73,28 +73,78 @@ class HopCompoundChart extends Component {
             borderColor: 'rgba(0, 0, 0, 0)',
             backgroundColor: 'rgba(200, 200, 200, 0.6)',
             pointRadius: 0,
+            pointHoverRadius: 0,
             fill: true,
             lineTension: 0
         };
     }
 
+    getLabelCSS = (index) => {
+        return {
+            color: SELECTED_COLORS[index % SELECTED_COLORS.length],
+            // color: 'white',
+            // fontWeight: 'bold',
+            // fontSize: '0.5rem',
+            // border: '1px solid white',
+            // padding: '3px 6px',
+            // borderRadius: '5px',
+            // marginLeft: '2px',
+            // marginTop: '8px',
+        };
+    }
+
     render() {
         return (
-            <div className="chart-container">
-                <div className="chart">
-                    <Line
-                        data={this.state}
-                        // datasetKeyProvider={this.datasetKeyProvider}
-                        width={100}
-                        height={60}
-                        options={{
-                            maintainAspectRatio: true,
-                        }}
-                    />
+            <div>
+                <h3>{this.props.title}</h3>
+                <div className="chart-container">
+                    <div className="y-labels-wrapper">
+                        <div className="y-labels">
+                            {this.props.reduxStore.selectedHops.map((hop, i) =>
+                                <div key={hop.id}>
+                                    <h4 style={this.getLabelCSS(i)}>{hop.variety_name}</h4>
+                                </div>
+                            )}
+                        </div>
+                        <div className="y-labels-spacer">
+                        </div>
+                    </div>
+                    <div className="chart">
+                        <Line
+                            data={this.state}
+                            // datasetKeyProvider={this.datasetKeyProvider}
+                            width={100}
+                            height={60}
+                            options={{
+                                maintainAspectRatio: true,
+                                tooltips: {
+                                    enabled: false
+                                },
+                                legend: {
+                                    display: false,
+                                },
+                                animation: {
+                                    duration: 1000,
+                                    easing: 'easeOutBounce',
+                                },
+                                scales: {
+                                    yAxes: [{
+                                        gridLines: {
+                                            display: false
+                                        },
+                                        ticks: {
+                                            display: false
+                                        }
+                                    }],
+                                }
+                            }}
+                        />
+                    </div>
                 </div>
             </div>
         );
     }
 }
 
-export default HopCompoundChart;
+const mapReduxStoreToProps = (reduxStore) => ({ reduxStore });
+export default connect(mapReduxStoreToProps)(HopCompoundChart);

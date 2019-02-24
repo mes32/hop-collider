@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircleOutline';
 
 import './DeleteHopBar.css';
 
@@ -8,7 +9,6 @@ const SELECTED_COLORS = [
     'rgba(243, 101, 35)',
     'rgba(0, 166, 82)',
     'rgba(146, 39, 143)',
-    'rgba(254, 242, 0)',
     'rgba(46, 49, 146)',
     'rgba(255, 148, 0)',
     'rgba(1, 168, 158)',
@@ -36,7 +36,7 @@ class DeleteHopBar extends Component {
     // Find the corresponding button color in the array
     getButtonColor = (index) => {
         return {
-            color: SELECTED_COLORS[index % SELECTED_COLORS.length],
+            backgroundColor: SELECTED_COLORS[index % SELECTED_COLORS.length],
         };
     }
 
@@ -46,7 +46,7 @@ class DeleteHopBar extends Component {
             <div className="delete-hop-bar">
                 {this.props.reduxStore.selectedHops.map((hop, i) => 
                     <button key={hop.id} onClick={this.removeHop.bind(this, hop)} style={this.getButtonColor(i)} >
-                        {hop.variety_name} X
+                        {hop.variety_name} &nbsp; <RemoveCircleIcon style={{ fontSize: 16 }} />
                     </button>
                 )}
             </div>
