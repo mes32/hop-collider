@@ -1,10 +1,11 @@
 .home-page-container {
     padding: 0 30px 0 30px;
+    height: 82vh;
+    overflow: scroll;
 }
 
 .home-page {
-    height: 82vh;
-    overflow: scroll;
+
     max-width: 768px;
     margin: 0 auto;
 }
