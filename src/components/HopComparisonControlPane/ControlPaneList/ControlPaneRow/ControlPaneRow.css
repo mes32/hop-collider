@@ -1,0 +1,33 @@
+td.control-pane-row {
+    border: 0px;
+    padding: 0;
+    margin: 0;
+}
+
+button.control-pane-include-hop {
+    width: 100%;
+    font-size: 1rem;
+    border: 0px;
+    background-color: inherit;
+
+    padding: 0.2rem 10px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button.control-pane-include-hop:hover {
+    color: white;
+    background-color: #329f5b;
+    cursor: pointer;
+}
+
+button.control-pane-include-hop:disabled {
+    color: rgb(182, 181, 181);
+    background-color: inherit;
+    font-style: italic;
+    cursor: auto;
+}
