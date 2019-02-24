@@ -21,3 +21,36 @@
 .scroll-pane-div h3 {
     text-align: center;
 }
+
+button.save-comparison-button {
+
+    margin: 1.4rem 0 0 0;
+
+    color: #72c4ff;
+    background-color: white;
+
+    border: 1px solid #72c4ff;
+    border-radius: 5px;
+
+    font-size: 1.2rem;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+button.save-comparison-button:hover {
+    color: white;
+    background-color: #72c4ff;
+    border: 1px solid #72c4ff;
+    cursor: pointer;
+}
+
+button.save-comparison-button:disabled {
+    color: #cccccc;
+    background-color: white;
+    border: 1px solid #cccccc;
+    cursor: auto;
+}
