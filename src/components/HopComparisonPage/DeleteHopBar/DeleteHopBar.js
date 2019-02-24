@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircleOutline';
 
 import './DeleteHopBar.css';
 
@@ -45,7 +46,7 @@ class DeleteHopBar extends Component {
             <div className="delete-hop-bar">
                 {this.props.reduxStore.selectedHops.map((hop, i) => 
                     <button key={hop.id} onClick={this.removeHop.bind(this, hop)} style={this.getButtonColor(i)} >
-                        {hop.variety_name} ✗
+                        {hop.variety_name} &nbsp; <RemoveCircleIcon style={{ fontSize: 16 }} />
                     </button>
                 )}
             </div>
