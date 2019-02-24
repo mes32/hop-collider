@@ -9,5 +9,15 @@
     float: none;
     margin: 0 auto;
     font-size: 0.8rem;
-    background-color: #d8d8d8;
+
+    border: 1px solid #587b7f;
+    border-bottom-width: 8px;
+}
+
+.hop-list-table tr:nth-child(odd) {
+    background-color: #f7f7f7;
+}
+
+.hop-list-table tr:nth-child(even) {
+    background-color: #d8d8d8;;
 }
