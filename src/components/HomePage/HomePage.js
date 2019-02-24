@@ -22,22 +22,24 @@ class UserPage extends Component {
                     </h1>
                     <h5 className="user-id-heading">User ID number: {this.props.reduxStore.user.id}</h5>
                     <LogOutButton className="log-in" />
-                    <h2>Saved Hop Comparisons</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Date Created</th>
-                                <th>Hops Compared</th>
-                                <th>Load</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.props.reduxStore.hopComparisons.map(comparison => 
-                                <HopComparisonRow key={comparison.id} comparison={comparison} history={this.props.history} />
-                            )}
-                        </tbody>
-                    </table>
+                    <div id="saved-hop-comparisons">
+                        <h2>Saved Hop Comparisons</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date Created</th>
+                                    <th>Hops Compared</th>
+                                    <th>Load</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.props.reduxStore.hopComparisons.map(comparison => 
+                                    <HopComparisonRow key={comparison.id} comparison={comparison} history={this.props.history} />
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         );

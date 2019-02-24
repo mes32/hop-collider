@@ -14,11 +14,15 @@ h1#welcome {
 }
 
 h5.user-id-heading {
-    margin: 0 0 2rem 0;
+    margin: 0 0 1.2rem 0;
     font-weight: normal;
     color: #bfbfbf;
 }
 
 #welcome-name {
     color: #587b7f;
+}
+
+#saved-hop-comparisons {
+    margin: 4rem 0 2rem 0;
 }
