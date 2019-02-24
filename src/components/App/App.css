@@ -34,17 +34,24 @@ input {
 }
 
 .log-in, .log-out, .register {
-  background-color: #00acb0;
+  background-color: #329f5b;
+  color: #f7f7f7;
+
+  padding: 0.4rem 20px;
   border-radius: 4px;
-  color: #f8f8f8;
-  min-height: 50px;
-  min-width: 100px;
+  border: 2px solid #29814b;
+  box-shadow: 1px 2px 5px 2px rgba(100, 100, 100, 0.2);
+  
+  font-size: 1rem;
+  font-weight: normal;
+
   outline:0;
   cursor: pointer;
 }
 
 .log-in:hover, .log-out:hover, .register:hover {
-  background-color: #008183;
+  background-color: #29814b;
+  color: white;
 }
 
 /* This line makes the "Register" and "Login" buttons look like links */
@@ -64,8 +71,8 @@ table {
   border-collapse: collapse;
 }
 
-table, th, td {
-  border: 1px solid #222222;
+table {
+    border-bottom: 4px solid #587b7f;
 }
 
 th, td {
@@ -73,10 +80,12 @@ th, td {
 }
 
 th {
-    background-color: #222222;
-    color: whitesmoke;
+    background-color: #587b7f;
+    color: #edf4f5;
+    text-align: left;
 }
 
 tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #e2f3f5;
+    /* background-color: blue; */
 }
