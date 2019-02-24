@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import './HomePage.css';
+
 import HopComparisonRow from './HopComparisonRow/HopComparisonRow';
 import LogOutButton from '../LogOutButton/LogOutButton';
 
@@ -13,28 +15,30 @@ class UserPage extends Component {
 
     render() {
         return (
-            <div>
-                <h1 id="welcome">
-                    Welcome, {this.props.reduxStore.user.username}!
-                </h1>
-                <p>Your ID is: {this.props.reduxStore.user.id}</p>
-                <LogOutButton className="log-in" />
-                <h2>Saved Hop Comparisons</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Date Created</th>
-                            <th>Hops Compared</th>
-                            <th>Load</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.props.reduxStore.hopComparisons.map(comparison => 
-                            <HopComparisonRow key={comparison.id} comparison={comparison} history={this.props.history} />
-                        )}
-                    </tbody>
-                </table>
+            <div className="home-page-container">
+                <div className="home-page">
+                    <h1 id="welcome">
+                        Welcome, <span id="welcome-name">{this.props.reduxStore.user.username}</span>.
+                    </h1>
+                    <h5 className="user-id-heading">User ID number: {this.props.reduxStore.user.id}</h5>
+                    <LogOutButton className="log-in" />
+                    <h2>Saved Hop Comparisons</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date Created</th>
+                                <th>Hops Compared</th>
+                                <th>Load</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.props.reduxStore.hopComparisons.map(comparison => 
+                                <HopComparisonRow key={comparison.id} comparison={comparison} history={this.props.history} />
+                            )}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         );
     }

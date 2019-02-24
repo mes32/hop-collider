@@ -1,0 +1,24 @@
+.home-page-container {
+    padding: 0 30px 0 30px;
+}
+
+.home-page {
+    height: 82vh;
+    overflow: scroll;
+    max-width: 768px;
+    margin: 0 auto;
+}
+
+h1#welcome {
+    margin-bottom: 0.2rem;
+}
+
+h5.user-id-heading {
+    margin: 0 0 2rem 0;
+    font-weight: normal;
+    color: #bfbfbf;
+}
+
+#welcome-name {
+    color: #467175;
+}
