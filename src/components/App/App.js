@@ -16,7 +16,7 @@ import './App.css';
 import AddHopPage from '../AddHopPage/AddHopPage';
 import AdminPage from '../AdminPage/AdminPage';
 import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
+import HomePage from '../HomePage/HomePage';
 import HopListPage from '../HopListPage/HopListPage';
 import HopVarietyPage from '../HopVarietyPage/HopVarietyPage';
 
@@ -37,7 +37,7 @@ class App extends Component {
             <Redirect exact from="/" to="/home" />
             <ProtectedRoute
               exact path="/home"
-              component={UserPage}
+              component={HomePage}
             />
             <Route
               exact path="/about"
