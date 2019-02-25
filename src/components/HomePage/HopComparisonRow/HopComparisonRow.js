@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-// import tz from 'moment-timezone';
 
 const POSTGRESQL_FORMAT = 'YYYY-MM-DDTHH:mm:ss.SSSZ';
 const OUTPUT_FORMAT = 'DD MMMM YYYY @ h:mm a';
