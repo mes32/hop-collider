@@ -1,0 +1,30 @@
+.about-page-container {
+    padding: 0 30px 0 30px;
+    height: 82vh;
+    overflow: scroll;
+}
+
+.about-page {
+    max-width: 768px;
+    margin: 0 auto;
+}
+
+.about-page-images {
+    margin-top: 2rem;
+    height: 18rem;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.about-page-images img {
+    max-height: 100%;
+}
+
+.caption {
+    color: rgb(200, 200, 200);
+    text-align: center;
+}
