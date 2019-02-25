@@ -1,15 +1,34 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
+import Swal from 'sweetalert2';
+
+const showSaveSuccess = () => {
+    Swal.fire({
+        type: 'success',
+        title: 'Hop analysis saved!',
+        showConfirmButton: true,
+        confirmButtonColor: '#587b7f',
+    });
+};
+
+const showSaveError = (error) => {
+    Swal.fire({
+        type: 'error',
+        title: 'Unable to save analysis.',
+        showConfirmButton: true,
+        confirmButtonColor: '#587b7f',
+    });
+    console.log(`Unable to save hop comparison on server. ${error}`);
+}
 
 // worker Saga: will be fired on 'SAVE_HOP_COMPARISON' actions
 function* saveHopComparison(action) {
     try {
         yield axios.post('api/hop_comparison', action.payload);
         yield put({ type: 'FETCH_HOP_COMPARISONS' });
+        yield showSaveSuccess();
     } catch (error) {
-        const errorMessage = `Unable to save hop comparison on server. ${error}`;
-        console.log(errorMessage);
-        alert(errorMessage);
+        yield showSaveError(error);
     }
 }
 
