@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
+// import tz from 'moment-timezone';
+
+const POSTGRESQL_FORMAT = 'YYYY-MM-DDTHH:mm:ss.SSSZ';
+const OUTPUT_FORMAT = 'DD MMMM YYYY @ h:mm a';
 
 class HopComparisonRow extends Component {
+
+    getCreatedAt = () => {
+        const rawString = this.props.comparison.created_at;
+        const timeStamp = moment(rawString, POSTGRESQL_FORMAT);
+        return timeStamp.format(OUTPUT_FORMAT);
+    }
 
     listHops = () => {
         const hops = this.props.comparison.hops;
@@ -36,7 +47,7 @@ class HopComparisonRow extends Component {
     render() {
         return (
             <tr>
-                <td>{this.props.comparison.created_at}</td>
+                <td>{this.getCreatedAt()}</td>
                 <td>{this.listHops()}</td>
                 <td>
                     <button onClick={this.load}>
