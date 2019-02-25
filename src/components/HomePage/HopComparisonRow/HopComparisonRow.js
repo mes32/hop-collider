@@ -7,14 +7,32 @@ import moment from 'moment';
 import IconButton from '../../IconButton/IconButton';
 
 const POSTGRESQL_FORMAT = 'YYYY-MM-DDTHH:mm:ss.SSSZ';
-const OUTPUT_FORMAT = 'DD MMMM YYYY @ h:mm a';
+const DATE_FORMAT = 'MMMM DD, YYYY';
+const TIME_FORMAT = ' @ h:mm a';
+
+const timeStampStyle = {
+    fontWeight: 'bold',
+    color: '#666666',
+};
 
 class HopComparisonRow extends Component {
 
     getCreatedAt = () => {
+        const current = moment();
         const rawString = this.props.comparison.created_at;
         const timeStamp = moment(rawString, POSTGRESQL_FORMAT);
-        return timeStamp.format(OUTPUT_FORMAT);
+
+        let datePrinted = timeStamp.format(DATE_FORMAT);
+        if (current.day() === timeStamp.day()) {
+            datePrinted = 'Today';
+        } else if (current.add(-1, 'days').day() === timeStamp.day()) {
+            datePrinted = 'Yesterday';
+        }
+
+        return {
+            date: datePrinted,
+            time: timeStamp.format(TIME_FORMAT),
+        }
     }
 
     listHops = () => {
@@ -48,9 +66,10 @@ class HopComparisonRow extends Component {
     }
 
     render() {
+        const timeStamp = this.getCreatedAt();
         return (
             <tr>
-                <td>{this.getCreatedAt()}</td>
+                <td><span style={timeStampStyle}>{timeStamp.date}</span> {timeStamp.time}</td>
                 <td>{this.listHops()}</td>
                 <td>
                     <IconButton icon={<LoadIcon />} onClick={this.load} />
