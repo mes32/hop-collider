@@ -3,7 +3,7 @@ button.icon-button {
     color: #444444;
     border: 0px;
     border-radius: 5px;
-    padding: 0.2rem 6px;
+    padding: 0.2rem 6px 0 6px;
 }
 
 button.icon-button:hover {
