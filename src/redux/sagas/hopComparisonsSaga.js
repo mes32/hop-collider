@@ -7,7 +7,7 @@ const showSaveSuccess = () => {
         type: 'success',
         title: 'Hop analysis saved!',
         showConfirmButton: true,
-        confirmButtonColor: '#587b7f',
+        confirmButtonColor: '#329f5b',
     });
 };
 
@@ -16,9 +16,19 @@ const showSaveError = (error) => {
         type: 'error',
         title: 'Unable to save analysis.',
         showConfirmButton: true,
-        confirmButtonColor: '#587b7f',
+        confirmButtonColor: '#329f5b',
     });
     console.log(`Unable to save hop comparison on server. ${error}`);
+}
+
+const showDeleteError = (error) => {
+    Swal.fire({
+        type: 'error',
+        title: 'Unable to delete analysis.',
+        showConfirmButton: true,
+        confirmButtonColor: '#587b7f',
+    });
+    console.log(`Unable to delete comparison from server. ${error}`);
 }
 
 // worker Saga: will be fired on 'SAVE_HOP_COMPARISON' actions
@@ -53,16 +63,30 @@ function* loadHopComparison(action) {
 
 function* deleteHopComparison(action) {
     try {
-        const id = action.payload.id;
-        const hops = action.payload.hops;
-        console.log(`id: ${id}`);
-        console.log(`hops: ${hops}`);
-        yield axios.delete(`api/hop_comparison/${action.payload.id}`, { data: { hops: hops } });
-        yield put({ type: 'FETCH_HOP_COMPARISONS' });
+        const result = yield Swal.fire({
+            title: 'Delete this hop comparison?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#329f5b',
+            cancelButtonColor: '#cccccc',
+            confirmButtonText: 'DELETE'
+        });
+        if (result.value) {
+            const id = action.payload.id;
+            const hops = action.payload.hops;
+            yield axios.delete(`api/hop_comparison/${id}`, { data: { hops: hops } });
+            yield put({ type: 'FETCH_HOP_COMPARISONS' });
+            yield Swal.fire({
+                title: 'Deleted!',
+                text: 'This comparison has been deleted.',
+                type: 'success',
+                confirmButtonColor: '#329f5b',
+                timer: 1500,
+            });
+        }
     } catch (error) {
-        const errorMessage = `Unable to delete comparison from server. ${error}`;
-        console.log(errorMessage);
-        alert(errorMessage);
+        yield showDeleteError(error);
     }
 }
 
