@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import DeleteIcon from '@material-ui/icons/Delete';
 import moment from 'moment';
+
+import IconButton from '../../IconButton/IconButton';
 
 const POSTGRESQL_FORMAT = 'YYYY-MM-DDTHH:mm:ss.SSSZ';
 const OUTPUT_FORMAT = 'DD MMMM YYYY @ h:mm a';
@@ -54,9 +57,7 @@ class HopComparisonRow extends Component {
                     </button>
                 </td>
                 <td>
-                    <button onClick={this.delete}>
-                        Delete
-                    </button>        
+                    <IconButton icon={<DeleteIcon />} onClick={this.delete} />        
                 </td>
             </tr>
         );
