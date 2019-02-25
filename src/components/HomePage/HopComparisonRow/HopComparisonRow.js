@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
+import LoadIcon from '@material-ui/icons/OpenInBrowser';
 import moment from 'moment';
 
 import IconButton from '../../IconButton/IconButton';
@@ -52,12 +53,10 @@ class HopComparisonRow extends Component {
                 <td>{this.getCreatedAt()}</td>
                 <td>{this.listHops()}</td>
                 <td>
-                    <button onClick={this.load}>
-                        Load
-                    </button>
+                    <IconButton icon={<LoadIcon />} onClick={this.load} />
                 </td>
                 <td>
-                    <IconButton icon={<DeleteIcon />} onClick={this.delete} />        
+                    <IconButton icon={<DeleteIcon />} onClick={this.delete} />
                 </td>
             </tr>
         );
