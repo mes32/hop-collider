@@ -79,6 +79,20 @@ CREATE TABLE hops
     other_oils_min DECIMAL(6,3) CHECK(other_oils_min >= 0 AND other_oils_min <= 100),
     other_oils_max DECIMAL(6,3) CHECK(other_oils_max >= 0 AND other_oils_max <= 100 AND other_oils_max > other_oils_min)
 );
+INSERT INTO "hops"
+    ("variety_name", "country_id", "aromas", "brewing_role_id", "alpha_acid_min", "alpha_acid_max", "beta_acid_min", "beta_acid_max", "cohumulone_min", "cohumulone_max", "total_oil_min", "total_oil_max", "beta_pinene_min", "beta_pinene_max", "myrcene_min", "myrcene_max", "linalool_min", "linalool_max", "caryophyllene_min", "caryophyllene_max", "farnesene_min", "farnesene_max", "humulene_min", "humulene_max", "geraniol_min", "geraniol_max", "selinene_min", "selinene_max", "other_oils_min", "other_oils_max")
+VALUES
+    ('Admiral', 7, 'orange, tea', NULL, 13, 16, 4, 6, 37, 45, 1, 1.7, NULL, NULL, 39, 48, NULL, NULL, 6, 8, 0, 2, 23, 26, NULL, NULL, NULL, NULL, 16, 32),
+    ('Ahtanum', 8, 'grapefruit', NULL, 3.5, 6.5, 4, 6, 30, 34, 0.5, 1.7, 0.6, 0.9, 45, 55, 0.4, 0.6, 9, 12, NULL, NULL, 15, 22, 0.4, 0.7, NULL, NULL, 8, 29),
+    ('Amarillo', 8, 'grapefruit', NULL, 7, 11, 5.5, 8, 20, 24, 1, 2.3, 0.4, 0.8, 40, 50, 0.5, 0.8, 7, 10, 6, 9, 19, 24, 0.1, 0.3, NULL, NULL, 5, 27),
+    ('Aramis', NULL, 'herbal', NULL, 7.9, 8.3, 3.8, 4.5, 20.5, 21.3, 1.2, 1.6, NULL, NULL, 40, NULL, NULL, NULL, 7.4, NULL, 2, 4, NULL, NULL, NULL, NULL, NULL, NULL, 28.6, NULL),
+    ('Aurora', NULL, 'noble', NULL, 7, 13, 2.7, 4.4, 20, 26, 0.9, 1.6, NULL, NULL, 20, 25, NULL, NULL, 6, 9, 5, 10, 20, 25, NULL, NULL, NULL, NULL, 31, 49),
+    ('Azacca', 8, 'mango', NULL, 14, 16, 4, 5.5, 38, 45, 1.6, 2.5, NULL, NULL, 46, 55, NULL, NULL, 8, 12, NULL, NULL, 14, 18, NULL, NULL, NULL, NULL, 14, 32),
+    ('Bitter Gold', 8, 'pear', NULL, 12, 14.5, 4.5, 6, NULL, NULL, 1, 2, 0.6, 0.9, 45, 55, 0.4, 0.7, 7, 11, NULL, NULL, 10, 18, 0.1, 0.3, NULL, NULL, 13, 36),
+    ('Boadicea', 7, 'floral', NULL, 7.5, 10, 3.2, 4.2, 23, 29, 1.4, 2.2, NULL, NULL, 30, 40, NULL, NULL, 15, 19, 0, 5, 20, NULL, NULL, NULL, NULL, NULL, 16, 35),
+    ('Bobek', NULL, 'noble', NULL, 3.5, 7.8, 4, 6.1, 27, 31, 0.7, 4, NULL, NULL, 30, 45, NULL, NULL, 4, 6, 4, 7, 13, 19, NULL, NULL, NULL, NULL, 23, 49),
+    ('Bouclier', NULL, 'herbal', NULL, 7.9, 8.5, 2.4, 3.3, 20, 25, 1.1, 1.6, NULL, NULL, 38, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, NULL, NULL, NULL, NULL, NULL, 28, NULL),
+    ('Bramling Cross', 7, 'blackcurrant', NULL, 5, 7, 2.3, 3.2, 34, NULL, 0.7, 1, NULL, NULL, 36, NULL, NULL, NULL, 15, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 18, 33);
 
 CREATE TABLE hop_comparison
 (
