@@ -49,6 +49,8 @@ router.post('/', (req, res) => {
         })().catch((error) => {
             console.error(error.stack);
         });
+    } else {
+        res.sendStatus(403);
     }
 });
 
