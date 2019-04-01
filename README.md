@@ -1,11 +1,14 @@
 # Hop Collider
-Hop data visualization tool
+A data visualization tool to help brewers compare different varieties of hops. Users can select one or more hop varieties and plot the concentrations of flavor and aroma producing compounds against the distribution for all hop varities.
+
+A deployed version can be found here: [hop-collider.herokuapp.com](https://hop-collider.herokuapp.com) 
+
 
 ## Utilized Web Stack
-- `User Interface` - React, CSS
-- `Client` - React
-- `Server` - Node.js with the Express framework
-- `Database` - PostgreSQL (pg module)
+- `User Interface` - React, CSS, Chart.js
+- `Client` - React, Redux, Redux-Saga
+- `Server` - Node.js, Express
+- `Database` - PostgreSQL
 
 ## Requirements
 - Git
