@@ -3,6 +3,7 @@ A data visualization tool to help brewers compare different varieties of hops. U
 
 A deployed version can be found here: [hop-collider.herokuapp.com](https://hop-collider.herokuapp.com) 
 
+![Screenshot](documentation/images/screenshot_hop-collider.png)
 
 ## Utilized Web Stack
 - `User Interface` - React, CSS, Chart.js
