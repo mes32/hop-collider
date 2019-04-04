@@ -1,5 +1,14 @@
 const testServer = require('supertest');
 const app = require('../server');
+// const bodyParser = require('body-parser');
+// const sessionMiddleware = require('../modules/session-middleware');
+
+// // Body parser middleware
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+
+// // Passport Session Configuration //
+// app.use(sessionMiddleware);
 
 test('Server should respond 200 to LOGOUT route /api/user/logout', () => {
     return testServer(app).post('/api/user/logout').then((response) => {
@@ -8,7 +17,7 @@ test('Server should respond 200 to LOGOUT route /api/user/logout', () => {
 });
 
 test('Server should protect /user ', () => {
-    testServer(app).post('/api/user/login').then((response) => {
+    return testServer(app).post('/api/user/login').then((response) => {
         expect(response.statusCode).toBe(400);
     });
 });
@@ -24,4 +33,11 @@ test('Server should allow logged in users access', () => {
                 expect(userResponse.statusCode).toBe(200);
             });
         });
-})
+});
+
+test('Route GET /api/brewing_role should return an array', () => {
+    return testServer(app).get('/api/brewing_role').then((response) => {
+        // expect(response.statusCode).toBe(200);
+        expect(response.json()).toBe(false);
+    });
+});
