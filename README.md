@@ -1,5 +1,9 @@
 # Hop Collider
-A data visualization tool to help brewers compare different varieties of hops. Users can select one or more hop varieties and plot the concentrations of flavor and aroma producing compounds against the distribution for all hop varities.
+Hop-collider is a data visualization tool to help brewers compare the chemistry of different varieties of hops. There are over 140 different hop varieties used to brew beer. These varieties naturally contain different amounts of flavor and aroma producing chemical compounds. This variance in the hop chemistry results in the distinctive flavor of each variety.
+
+Using this tool users can select one or more hop varieties to compare, producing a series of plots one for each chemical compound. These plots visualize the typical range found in a particular variety along with the aggregate distribution found in all the hop varieties. This helps brewers discover new and interesting hops to use, find substitute hops based on similar profiles, and dig into the chemical-basis of hop flavor.
+
+Users can also register for an account. After authenticating, this allows them to save hop comparisons and load them again at a later date. When sorting hop varieties by popularity on the comparison page this is partially influenced by the number of saved comparisons that include each variety.
 
 A deployed version can be found here: [hop-collider.herokuapp.com](https://hop-collider.herokuapp.com) 
 
