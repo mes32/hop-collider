@@ -5,7 +5,7 @@ Using this tool users can select one or more hop varieties to compare, producing
 
 Users can also register for an account. After authenticating, this allows them to save hop comparisons and load them again at a later date. When sorting hop varieties by popularity on the comparison page this is partially influenced by the number of saved comparisons that include each variety.
 
-A deployed version can be found here: [hop-collider.herokuapp.com](https://hop-collider.herokuapp.com) 
+A deployed version can be found here: [https://hop-collider.herokuapp.com/#/hop_comparison](https://hop-collider.herokuapp.com/#/hop_comparison) 
 
 ![Screenshot](documentation/images/screenshot_hop-collider.png)
 
